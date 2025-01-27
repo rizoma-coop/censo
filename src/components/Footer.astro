@@ -1,0 +1,21 @@
+﻿---
+import { Image } from 'astro:assets'
+import logoDark from '@/images/rizoma-logo-black.png'
+---
+
+<footer>
+  <div class="l-container l-row">
+    <Image src={logoDark} alt="Censo Rizoma 2025" width={100} />
+    <p>Censo Rizoma 2025</p>
+  </div>
+</footer>
+
+<style scoped>
+  footer {
+    margin-block-start: 3rem;
+    padding-block: 4rem;
+    color: #FFF;
+    background-color: var(--color-neutral-70);
+  }
+</style>
+

@@ -1,0 +1,33 @@
+﻿---
+const { type = 'button', href } = Astro.props
+---
+
+{
+  href ? (
+    <a href={href}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type}>
+      <slot />
+    </button>
+  )
+}
+
+
+<style>
+  a,
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: #FFF;
+    font-weight: 500;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+  }
+</style>

@@ -1,0 +1,15 @@
+﻿.l-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+.l-stack--small {
+  gap: 1rem;
+}
+.l-stack--large {
+  gap: 4rem;
+}
+.l-stack--x-small {
+  gap: .5rem;
+}

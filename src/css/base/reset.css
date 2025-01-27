@@ -1,0 +1,54 @@
+html,
+body {
+  height: 100%;
+}
+h1,
+h2,
+h3,
+body,
+p,
+ul,
+figure {
+  margin: 0;
+}
+ul,
+button {
+  padding: 0;
+}
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+li,
+p {
+  line-height: 1.5;
+}
+ul {
+  list-style: none;
+}
+a,
+button,
+svg {
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+button,
+input {
+  font-size: inherit;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}

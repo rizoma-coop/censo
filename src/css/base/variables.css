@@ -1,0 +1,18 @@
+:root {
+
+
+  /* Colors */
+  --color-primary: rgb(30, 129, 127);
+
+  --color-neutral-5: hsl(0 0% 97.5%);
+  --color-neutral-10: hsl(240 4.8% 95.9%);
+  --color-neutral-20: hsl(240 5.9% 90%);
+  --color-neutral-30: hsl(240 4.9% 83.9%);
+  --color-neutral-40: hsl(240 5% 64.9%);
+  --color-neutral-50: hsl(240 3.8% 46.1%);
+  --color-neutral-60: hsl(240 5.2% 33.9%);
+  --color-neutral-70: hsl(240 5.3% 26.1%);
+  --color-neutral-80: hsl(240 3.7% 15.9%);
+  --color-neutral-90: hsl(240 5.9% 10%);
+  --color-neutral-95: hsl(240 7.3% 8%);
+}

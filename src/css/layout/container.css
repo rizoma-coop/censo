@@ -1,0 +1,12 @@
+.l-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-inline: 2rem;
+}
+@media (max-width: 600px) {
+  .l-container {
+    padding-inline: 1rem;
+  }
+}

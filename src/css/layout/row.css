@@ -1,0 +1,14 @@
+.l-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.l-row--small {
+  gap: 1rem;
+}
+.l-row--x-small {
+  gap: 0.5rem;
+}
+.l-row__fill {
+  flex-grow: 1;
+}

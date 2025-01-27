@@ -1,0 +1,27 @@
+﻿---
+import { Image } from 'astro:assets'
+import logo from '@/images/rizoma-logo-small.png'
+---
+
+<header>
+  <div class="l-container container">
+    <figure>
+      <Image 
+        src={logo} 
+        alt="Logótipo Rizoma" 
+        width={120}
+      />
+    </figure>
+  </div>
+</header>
+
+<style scoped>
+  header {
+    padding-block: 2rem;
+    color: var(--color-primary);
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+</style>
