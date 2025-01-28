@@ -1,37 +1,30 @@
 ﻿---
 import Layout from '@/layouts/layout.astro'
-import Header from '@/components/Header.astro'
-import Footer from '@/components/Footer.astro'
 import Button from '@/components/Button.astro'
 ---
 
 <Layout>
-  <Header />
-
-  <main class="l-container l-stack l-stack--large">
-    <h1>
-      <small>Bem-vindo ao</small><br>
-      Censo Rizoma<br>
-      2025
-    </h1>
-    <p>O Censo Rizoma é uma iniciativa da RizomaCoop, que visa perceber a população da cooperativa.</p>
-    <ul>
-      <li>Demora entre 8 e 10 minutos.</li>
-      <li>É completamente anónimo.</li>
-    </ul>
-    <Button href="/censo">Iniciar</Button>
-  </main>
-
-  <Footer />
+  <h1>
+    <small>Bem-vindo ao</small><br>
+    Censo Rizoma<br>
+    2025
+  </h1>
+  <p>O Censo Rizoma é uma iniciativa da RizomaCoop, que visa perceber a população da cooperativa.</p>
+  <ul>
+    <li>Demora entre 8 e 10 minutos.</li>
+    <li>É completamente anónimo.</li>
+  </ul>
+  <Button href="/censo">Iniciar</Button>
 </Layout>
 
-<style scoped>
+<style is:global>
   main {
-    min-height: 50vh;
-    display: flex;
     justify-content: center;
     align-items: center;
   }
+</style>
+
+<style scoped>
   h1 {
     font-size: 5rem;
     font-weight: 900;

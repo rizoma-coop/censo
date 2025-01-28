@@ -1,0 +1,21 @@
+﻿---
+import Layout from '@/layouts/layout.astro'
+import Auth from '@/components/Auth.vue'
+---
+
+<Layout>
+  <h1>Dashboard</h1>
+  <Auth client:load class="content" />
+</Layout>
+
+<style scoped>
+  h1 {
+    text-align: center;
+  }
+  .content {
+    width: 100%;
+    max-width: 30rem;
+    margin-inline: auto;
+  }
+</style>
+
