@@ -18,7 +18,7 @@ import dates from '@/config'
       <p>Preenche o censo 2025 até dia 19 de Fevereiro.</p>
       <Button href="/censo">Preencher Censo 2025</Button>
     ) : (
-      <p>O Censo está a ser preparado e estará disponível entre os dias {dates.start.toLocaleDateString()} e {dates.end.toLocaleDateString()}.</p>
+      <p>O Censo está a ser preparado e estará disponível entre os dias {dates.start.toLocaleDateString('pt-PT')} e {dates.end.toLocaleDateString('pt-PT')}.</p>
     )
   }
 </Layout>
@@ -32,19 +32,19 @@ import dates from '@/config'
 
 <style scoped>
   h1 {
-    font-size: clamp(3rem, 5vw, 5rem);
+    font-size: clamp(2rem, 5vw, 5rem);
     font-weight: 900;
     color: var(--color-primary);
     text-align: center;
     line-height: 1;
     > small {
-      font-size: clamp(1.5rem, 2.5vw, 3rem);
+      font-size: clamp(1rem, 2.5vw, 2.5rem);
       font-weight: 500;
     }
   }
   p,
   li {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-size: clamp(1rem, 2.5vw, 2rem);
     text-align: center;
   }
   p {

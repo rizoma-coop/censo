@@ -1,14 +1,15 @@
 ﻿.l-stack {
+  --default-gap: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--default-gap);
 }
 .l-stack--small {
-  gap: 1rem;
+  --gap: calc(var(--default-gap) / 2);
 }
 .l-stack--large {
-  gap: 4rem;
+  --gap: calc(var(--default-gap) * 2);
 }
 .l-stack--x-small {
-  gap: .5rem;
+  --gap: calc(var(--default-gap) / 4);
 }

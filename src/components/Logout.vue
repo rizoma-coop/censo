@@ -6,11 +6,10 @@
 
 
 <script setup lang="ts">
-import { isAuthenticated } from '@/stores/auth'
-
+import loggedInClass from '@/utils/loggedInClass';
 const logout = () => {
   localStorage.removeItem('passwordId')
   window.location.href = '/'
-  isAuthenticated.set(false)
+  loggedInClass.remove()
 }
 </script>

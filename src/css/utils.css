@@ -1,0 +1,7 @@
+﻿
+.is-visible-logged-in {
+  display: none;
+}
+body.is-logged-in .is-visible-logged-in {
+  display: block;
+}

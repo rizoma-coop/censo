@@ -2,6 +2,8 @@
 import Logout from './Logout.vue'
 import isSurveyAvailable from '@/utils/isSurveyAvailable'
 
+const className = Astro.props.class
+
 const currentPath = Astro.url.pathname
 
 const pages = [
@@ -16,27 +18,25 @@ const pages = [
   },
   {
     label: 'Dashboard',
-    href: '/admin',
-    isAdmin: true
+    href: '/admin'
   },
   {
     label: 'Criador',
-    href: '/admin/editor',
-    isAdmin: true
+    href: '/admin/editor'
   },
 ]
 
 ---
 
-<nav>
+<nav class={className}>
   {
     <ul>
       {pages.map((page) => (
-        <li class={page.isAdmin ? 'is-visible-logged-in' : ''}>
+        <li>
           <a href={page.href} class={currentPath === page.href ? 'active' : ''}>{page.label}</a>
         </li>
       ))}
-      <li class="is-visible-logged-in">
+      <li>
         <Logout client:load>Sair</Logout>
       </li>
     </ul>
@@ -59,13 +59,6 @@ const pages = [
     border-bottom: 2px solid var(--color-primary);
     font-weight: 600;
   }
-  .is-visible-logged-in {
-    display: none;
-  }
-  body.is-logged-in .is-visible-logged-in {
-    display: block;
-  }
-
   @media (max-width: 700px) {
     ul {
       gap: 1rem;
