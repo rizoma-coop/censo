@@ -1,11 +1,13 @@
 ﻿---
 import Layout from '@/layouts/layout.astro'
 import AuthProvider from '@/components/AuthProvider.vue'
+
+const answers = 0
 ---
 
 <Layout>
   <h1>Dashboard</h1>
   <AuthProvider client:load>
-    <p>Logged in</p>
+    <p>Número de respostas: <strong>{answers}</strong></p>
   </AuthProvider>
 </Layout>
