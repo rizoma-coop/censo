@@ -10,7 +10,7 @@ import Navigation from './Navigation.astro'
       <Image 
         src={logo} 
         alt="Logótipo Rizoma"
-        width={100}
+        width={80}
       />
     </figure>
     <h1>Censo Rizoma 2025</h1>
@@ -43,7 +43,7 @@ import Navigation from './Navigation.astro'
   }
   h1 {
     font-weight: 500;
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .navigation {
     grid-area: navigation;
@@ -61,16 +61,11 @@ import Navigation from './Navigation.astro'
       justify-content: center;
     }
   }
-  @media (max-width: 700px) {
-    h1 {
-      font-size: 1.5rem;
-    }
-  }
   @media (max-width: 600px) {
     .logo {
       --gap: 1rem;
       img {
-        width: 70px;
+        width: 65px;
         height: auto;
       }
     }

@@ -39,7 +39,7 @@ async function renderSurveyCreator() {
 
 <style>
   #surveyCreatorContainer {
-    height: 80vh;
+    height: 100%;
   }
   .svc-creator__banner {
     display: none;
