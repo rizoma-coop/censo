@@ -10,11 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^8.0.4",
+    "@astrojs/netlify": "^6.1.0",
     "@astrojs/vue": "^5.0.6",
     "@xata.io/client": "0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930",
     "astro": "^5.1.5",
     "nanostores": "^0.11.3",
+    "sharp": "^0.33.5",
     "survey-core": "^1.12.21",
     "vue": "^3.5.13"
   }

@@ -1,11 +1,14 @@
 // @ts-check
 import { defineConfig } from 'astro/config'
 import vue from '@astrojs/vue'
-import vercel from '@astrojs/vercel'
+import netlify from '@astrojs/netlify/functions'
 
 // https://astro.build/config
 export default defineConfig({
-  adapter: vercel(),
+  output: "server",
+  adapter: netlify({
+    edgeMiddleware: true
+  }),
   integrations: [
     vue({
       template: {
