@@ -1,4 +1,4 @@
-import { XataClient } from '@/xata'
+import { XataClient } from '@/utils/xata'
 
 const xataClient = new XataClient({
   apiKey: import.meta.env.XATA_API_KEY,

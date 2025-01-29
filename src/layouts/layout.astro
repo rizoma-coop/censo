@@ -17,6 +17,7 @@ import Footer from '@/components/Footer.astro'
 
   <script type="text/javascript" src="https://unpkg.com/survey-core/survey.core.min.js"></script>
   <script type="text/javascript" src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
+
 </head>
 <body>
   <Header />
@@ -24,5 +25,10 @@ import Footer from '@/components/Footer.astro'
     <slot />
   </main>
   <Footer />
+
+  <script>
+    import loggedInClass from '@/utils/loggedInClass'
+    loggedInClass.toggle()
+  </script>
 </body>
 </html>

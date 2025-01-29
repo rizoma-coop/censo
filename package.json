@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/netlify": "^6.1.0",
     "@astrojs/vue": "^5.0.6",
+    "@nanostores/vue": "^0.11.0",
     "@xata.io/client": "0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930",
     "astro": "^5.1.5",
     "nanostores": "^0.11.3",

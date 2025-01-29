@@ -3,6 +3,7 @@
 import api from '@/utils/api'
 import Button from '@/components/Button.vue'
 import Input from '@/components/Input.vue'
+import loggedInClass from '@/utils/loggedInClass'
 
 import { ref, onMounted } from 'vue'
 
@@ -17,7 +18,9 @@ onMounted(async () => {
     isLoading.value = true
     const { data } = await api.get(`auth?passwordId=${passwordId}`)
     isLoggedIn.value = !!data.passwordId
-    isLoading.value = false
+    if (isLoggedIn.value) {
+      loggedInClass.add()
+    }
   }
   isLoading.value = false
 })
@@ -32,6 +35,7 @@ async function handleSubmit(event: Event) {
   if (data.passwordId) {
     isLoggedIn.value = true
     localStorage.setItem('passwordId', data.passwordId)
+    loggedInClass.add()
   } else {
     alert('Wrong password')
   }
@@ -53,3 +57,11 @@ async function handleSubmit(event: Event) {
     </template>
   </template>
 </template>
+
+<style scoped>
+  form {
+    width: 100%;
+    max-width: 30rem;
+    margin: 0 auto;
+  }
+</style>

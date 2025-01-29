@@ -1,6 +1,8 @@
 ﻿---
 import Layout from '@/layouts/layout.astro'
 import Button from '@/components/Button.astro'
+import isSurveyAvailable from '@/utils/isSurveyAvailable'
+import dates from '@/config'
 ---
 
 <Layout>
@@ -10,11 +12,15 @@ import Button from '@/components/Button.astro'
     2025
   </h1>
   <p>O Censo Rizoma é uma iniciativa da RizomaCoop, que visa perceber a população da cooperativa.</p>
-  <ul>
-    <li>Demora entre 8 e 10 minutos.</li>
-    <li>É completamente anónimo.</li>
-  </ul>
-  <Button href="/censo">Iniciar</Button>
+
+  {
+    isSurveyAvailable ? (
+      <p>Preenche o censo 2025 até dia 19 de Fevereiro.</p>
+      <Button href="/censo">Preencher Censo 2025</Button>
+    ) : (
+      <p>O Censo está a ser preparado e estará disponível entre os dias {dates.start.toLocaleDateString()} e {dates.end.toLocaleDateString()}.</p>
+    )
+  }
 </Layout>
 
 <style is:global>

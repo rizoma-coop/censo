@@ -14,6 +14,9 @@ importers:
       '@astrojs/vue':
         specifier: ^5.0.6
         version: 5.0.6(astro@5.1.10(rollup@4.32.0)(typescript@5.7.3))(rollup@4.32.0)(vue@3.5.13(typescript@5.7.3))
+      '@nanostores/vue':
+        specifier: ^0.11.0
+        version: 0.11.0(nanostores@0.11.3)(vue@3.5.13(typescript@5.7.3))
       '@xata.io/client':
         specifier: 0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930
         version: 0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930(typescript@5.7.3)
@@ -498,6 +501,20 @@ packages:
     resolution: {integrity: sha512-llMXd39jtP0HpQLVI37Bf1m2ADlEb35GYSh1SDSLsBhR+5iCxiNGlT31yqbNtVHygHAtMy6dWFERpU2JgufhPg==}
     engines: {node: '>=18'}
     hasBin: true
+
+  '@nanostores/vue@0.11.0':
+    resolution: {integrity: sha512-4ndyLhwVFl1xhOnvWuMvYiG4K2rYvkaQWP3nJC1/RwK/dvpDgLPywwv6MnBdFydqbOGuXNaXOEwa3HsG9CujmA==}
+    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
+    peerDependencies:
+      '@nanostores/logger': '>=0.4.0'
+      '@vue/devtools-api': '>=7.6.2'
+      nanostores: '>=0.11.3'
+      vue: '>=3.3.1'
+    peerDependenciesMeta:
+      '@nanostores/logger':
+        optional: true
+      '@vue/devtools-api':
+        optional: true
 
   '@netlify/functions@2.8.2':
     resolution: {integrity: sha512-DeoAQh8LuNPvBE4qsKlezjKj0PyXDryOFJfJKo3Z1qZLKzQ21sT314KQKPVjfvw6knqijj+IO+0kHXy/TJiqNA==}
@@ -2725,6 +2742,11 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - supports-color
+
+  '@nanostores/vue@0.11.0(nanostores@0.11.3)(vue@3.5.13(typescript@5.7.3))':
+    dependencies:
+      nanostores: 0.11.3
+      vue: 3.5.13(typescript@5.7.3)
 
   '@netlify/functions@2.8.2':
     dependencies:

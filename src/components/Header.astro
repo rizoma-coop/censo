@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets'
 import logo from '@/images/rizoma-logo-small.png'
 import Navigation from './Navigation.astro'
+const currentPath = Astro.url.pathname
 ---
 
 <header>
@@ -16,7 +17,7 @@ import Navigation from './Navigation.astro'
       </figure>
     </a>
     <h1 class="l-row__fill">Censo Rizoma 2025</h1>
-    <Navigation />
+    <Navigation currentPath={currentPath} />
   </div>
 </header>
 
