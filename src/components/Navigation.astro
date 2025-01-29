@@ -1,6 +1,5 @@
 ﻿---
 import Logout from './Logout.vue'
-import isSurveyAvailable from '@/utils/isSurveyAvailable'
 
 const className = Astro.props.class
 
@@ -13,8 +12,7 @@ const pages = [
   },
   {
     label: 'Censo',
-    href: '/censo',
-    isAdmin: !isSurveyAvailable
+    href: '/censo'
   },
   {
     label: 'Dashboard',
@@ -29,18 +27,16 @@ const pages = [
 ---
 
 <nav class={className}>
-  {
-    <ul>
-      {pages.map((page) => (
-        <li>
-          <a href={page.href} class={currentPath === page.href ? 'active' : ''}>{page.label}</a>
-        </li>
-      ))}
+  <ul>
+    {pages.map((page) => (
       <li>
-        <Logout client:load>Sair</Logout>
+        <a href={page.href} class={currentPath === page.href ? 'active' : ''}>{page.label}</a>
       </li>
-    </ul>
-  }
+    ))}
+    <li>
+      <Logout client:load>Sair</Logout>
+    </li>
+  </ul>
 </nav>
 
 
@@ -53,7 +49,7 @@ const pages = [
     justify-content: center;
   }
   a {
-    padding: .2rem 0.5rem;
+    padding: .2rem 0;
   }
   .active {
     border-bottom: 2px solid var(--color-primary);
