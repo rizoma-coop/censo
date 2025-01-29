@@ -1,0 +1,24 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cu7cumu0o1o9t4lu073g",
+    "operations": [
+      {
+        "add_column": {
+          "table": "surveys",
+          "column": {
+            "name": "survey",
+            "type": "json",
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cu7cumu0o1o9t4lu073g",
+  "parent": "mig_cu7cuh4nk4o54qi177h0",
+  "schema": "public",
+  "startedAt": "2025-01-20T22:34:04.518411Z"
+}

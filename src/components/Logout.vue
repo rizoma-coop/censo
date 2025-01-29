@@ -1,11 +1,16 @@
 ﻿<template>
-  <button @click="logout">Sair</button>
+  <button @click="logout">
+    <slot />
+  </button>
 </template>
 
-<script setup>
-  import { isAuthenticated } from '@/stores/auth'
 
-  const logout = () => {
-    isAuthenticated.set(false)
-  }
+<script setup lang="ts">
+import { isAuthenticated } from '@/stores/auth'
+
+const logout = () => {
+  localStorage.removeItem('passwordId')
+  window.location.href = '/'
+  isAuthenticated.set(false)
+}
 </script>

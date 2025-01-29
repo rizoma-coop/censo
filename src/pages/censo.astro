@@ -1,8 +1,24 @@
 ﻿---
 import Layout from '@/layouts/layout.astro'
-import Survey from '@/components/Survey.astro'
 ---
 
+<script>
+  import { surveyJson } from '@/data'
+
+  // @ts-ignore
+  const survey = new Survey.Model(surveyJson);
+
+  document.addEventListener('DOMContentLoaded', function() {
+    survey.render(document.getElementById('surveyContainer'))
+  })
+</script>
+
 <Layout>
-  <Survey />
+  <div id="surveyContainer"></div>
 </Layout>
+
+<style>
+  #surveyContainer {
+    width: 100%;
+  }
+</style>

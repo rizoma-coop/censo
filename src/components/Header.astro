@@ -1,21 +1,25 @@
 ﻿---
 import { Image } from 'astro:assets'
 import logo from '@/images/rizoma-logo-small.png'
+import Navigation from './Navigation.astro'
 ---
 
 <header>
-  <div class="l-container container">
-    <a href="/">
+  <div class="l-container l-row container">
+    <a href="/" class="logo">
       <figure>
         <Image 
           src={logo} 
           alt="Logótipo Rizoma" 
-          width={120}
+          width={100}
         />
       </figure>
     </a>
+    <h1 class="l-row__fill">Censo Rizoma 2025</h1>
+    <Navigation />
   </div>
 </header>
+
 
 <style scoped>
   header {
@@ -23,7 +27,14 @@ import logo from '@/images/rizoma-logo-small.png'
     color: var(--color-primary);
   }
   .container {
-    display: flex;
-    justify-content: center;
+    align-items: center;
   }
+  h1 {
+    font-weight: 500;
+  }
+  .logo {
+    padding-inline-end: 2.2rem;
+    border-inline-end: 1px solid var(--color-primary);
+  }
+
 </style>

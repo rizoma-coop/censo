@@ -1,0 +1,24 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cuclckhf9c09ofa1291g",
+    "operations": [
+      {
+        "add_column": {
+          "up": "''",
+          "table": "passwords",
+          "column": {
+            "name": "password",
+            "type": "text",
+            "comment": ""
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cuclckhf9c09ofa1291g",
+  "parent": "mig_cuclcetl59sv1v78p1fg",
+  "schema": "public",
+  "startedAt": "2025-01-28T22:12:35.203659Z"
+}

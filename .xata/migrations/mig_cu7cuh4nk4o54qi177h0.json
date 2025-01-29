@@ -1,0 +1,19 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cu7cuh4nk4o54qi177h0",
+    "operations": [
+      {
+        "rename_table": {
+          "to": "surveys",
+          "from": "survey"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cu7cuh4nk4o54qi177h0",
+  "parent": "mig_cu7cufe0o1o9t4lu072g",
+  "schema": "public",
+  "startedAt": "2025-01-20T22:33:41.285059Z"
+}

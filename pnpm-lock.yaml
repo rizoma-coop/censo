@@ -14,6 +14,9 @@ importers:
       '@astrojs/vue':
         specifier: ^5.0.6
         version: 5.0.6(astro@5.1.10(rollup@4.32.0)(typescript@5.7.3))(rollup@4.32.0)(vue@3.5.13(typescript@5.7.3))
+      '@xata.io/client':
+        specifier: 0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930
+        version: 0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930(typescript@5.7.3)
       astro:
         specifier: ^5.1.5
         version: 5.1.10(rollup@4.32.0)(typescript@5.7.3)
@@ -774,6 +777,11 @@ packages:
 
   '@vue/shared@3.5.13':
     resolution: {integrity: sha512-/hnE/qP5ZoGpol0a5mDi45bOd7t3tjYJBjsgCsivow7D48cJeV5l05RD82lPqi7gRiphZM37rnhW1l6ZoCNNnQ==}
+
+  '@xata.io/client@0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930':
+    resolution: {integrity: sha512-tRhsrV6vSJk4r+Cn7WkE1hyV2WfnHOoMzpQeLujqrbemPtVj82R1uhqHM2fPFuUKMfD+19PVF+Gist0ePlX5SQ==}
+    peerDependencies:
+      typescript: '>=4.5'
 
   abbrev@3.0.0:
     resolution: {integrity: sha512-+/kfrslGQ7TNV2ecmQwMJj/B65g5KVq1/L3SGVZ3tCYGqlzFuFCGBZJtMP99wH3NpEUyAjn0zPdPUg0D+DwrOA==}
@@ -3018,6 +3026,10 @@ snapshots:
       vue: 3.5.13(typescript@5.7.3)
 
   '@vue/shared@3.5.13': {}
+
+  '@xata.io/client@0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930(typescript@5.7.3)':
+    dependencies:
+      typescript: 5.7.3
 
   abbrev@3.0.0: {}
 

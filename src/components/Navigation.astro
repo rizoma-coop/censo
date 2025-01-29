@@ -1,1 +1,64 @@
-﻿
+﻿---
+import Logout from './Logout.vue'
+const currentPath = Astro.url.pathname
+
+const publicPages = [
+  {
+    label: 'Início',
+    href: '/'
+  },
+  {
+    label: 'Censo',
+    href: '/censo'
+  }
+]
+const adminPages = [
+  {
+    label: 'Dashboard',
+    href: '/admin'
+  },
+  {
+    label: 'Criador',
+    href: '/admin/editor'
+  },
+  
+]
+
+const isAdmin = currentPath.startsWith('/admin')
+const pages = isAdmin ? adminPages : publicPages
+---
+
+<nav>
+  {
+    <ul>
+      {pages.map((page) => (
+        <li>
+          <a href={page.href} class={currentPath === page.href ? 'active' : ''}>{page.label}</a>
+        </li>
+      ))}
+      {
+        isAdmin && (
+          <li>
+            <Logout client:load>Sair</Logout>
+          </li>
+        )
+      }
+    </ul>
+  }
+</nav>
+
+
+
+<style>
+  ul {
+    display: flex;
+    gap: 2rem;
+  }
+  a {
+    padding: .2rem 0.5rem;
+  }
+  .active {
+    border-bottom: 2px solid var(--color-primary);
+    font-weight: 600;
+  }
+</style>
