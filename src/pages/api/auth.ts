@@ -19,7 +19,7 @@ export const GET: APIRoute = async ({ request }) => {
         })
         .getFirst()
 
-      if (response && response) {
+      if (response) {
         passwordIdMatch = passwordId
       }
     } else if (password) {

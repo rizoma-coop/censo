@@ -1,45 +1,14 @@
 ﻿---
 import Layout from '@/layouts/layout.astro'
 import AuthProvider from '@/components/AuthProvider.vue'
+import SurveyCreator from '@/components/SurveyCreator.vue'
 ---
-
-<script>
-  import { surveyJson } from '@/data'
-
-  const observerOptions = {
-    childList: true,
-    subtree: true,
-  }
-  const observer = new MutationObserver(onMutateDom)
-
-  function renderCreator() {
-    // @ts-ignore
-    const survey = new Survey.Model(surveyJson)
-    survey.render(document.getElementById('surveyContainer'))
-  }
-
-  function onMutateDom(records: any, observer: any) {
-    const surveyContainer = document.getElementById('surveyContainer')
-    if (surveyContainer) {
-      observer.disconnect()
-      renderCreator()
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const container = document.getElementById('authContainer')
-    if (container) {
-      observer.observe(container, observerOptions)
-    }
-  })
-
-</script>
 
 <Layout>
   <h1>Criador de inquérito</h1>
   <div id="authContainer">
     <AuthProvider client:load>
-      <div id="surveyContainer"></div>
+      <SurveyCreator />
     </AuthProvider>
   </div>
 </Layout>
