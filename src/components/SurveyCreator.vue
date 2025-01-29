@@ -1,9 +1,47 @@
-﻿<script lang="ts">
+﻿<script lang="ts" setup>
+import { ref, onMounted } from 'vue'
+import api from '@/utils/api'
 
+const isLoading = ref(true)
+
+const creatorOptions = {
+  showLogicTab: true,
+  isAutoSave: true
+}
+
+onMounted(() => {
+  renderSurveyCreator()
+})
+
+async function renderSurveyCreator() {
+
+  const { data } = await api.get('surveys?id=survey-rizoma-2025')
+
+  isLoading.value = false
+  if (data) {
+
+    // @ts-ignore
+    const creator = new SurveyCreator.SurveyCreator(creatorOptions)
+    creator.text = JSON.stringify(data.survey)
+    creator.saveSurveyFunc = (saveNo: any, callback: any) => { 
+      console.log('saveNo', saveNo)
+      console.log('callback', callback)
+    }
+    
+    creator.render(document.getElementById('surveyCreatorContainer'))
+  }
+}
 </script>
 
 <template>
-  <div>
-    <h1>Aqui vai aparecer o criador de inquérito</h1>
-  </div>
+  <div id="surveyCreatorContainer"></div>
 </template>
+
+<style>
+  #surveyCreatorContainer {
+    height: 80vh;
+  }
+  .svc-creator__banner {
+    display: none;
+  }
+</style>

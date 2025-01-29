@@ -18,6 +18,9 @@
     "nanostores": "^0.11.3",
     "sharp": "^0.33.5",
     "survey-core": "^1.12.21",
+    "survey-creator-core": "^1.12.21",
+    "survey-creator-vue": "^1.12.21",
+    "survey-vue3-ui": "^1.12.21",
     "vue": "^3.5.13"
   }
 }

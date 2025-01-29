@@ -5,16 +5,15 @@ import SurveyCreator from '@/components/SurveyCreator.vue'
 ---
 
 <Layout>
-  <h1>Criador de inquérito</h1>
   <div id="authContainer">
     <AuthProvider client:load>
-      <SurveyCreator />
+      <SurveyCreator client:load />
     </AuthProvider>
   </div>
 </Layout>
 
 <style>
-  #surveyContainer {
-    width: 100%;
+  #authContainer {
+    height: 100%;
   }
 </style>

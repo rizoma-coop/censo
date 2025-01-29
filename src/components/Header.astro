@@ -2,43 +2,37 @@
 import { Image } from 'astro:assets'
 import logo from '@/images/rizoma-logo-small.png'
 import Navigation from './Navigation.astro'
-const currentPath = Astro.url.pathname
 ---
 
 <header>
-  <div class="l-container container">
-    <a href="/" class="logo">
-      <figure>
-        <Image 
-          src={logo} 
-          alt="Logótipo Rizoma"
-          width={100}
-        />
-      </figure>
-      <h1>Censo Rizoma 2025</h1>
-    </a>
-    <Navigation currentPath={currentPath} class="navigation" />
-  </div>
+  <a href="/" class="logo">
+    <figure>
+      <Image 
+        src={logo} 
+        alt="Logótipo Rizoma"
+        width={100}
+      />
+    </figure>
+    <h1>Censo Rizoma 2025</h1>
+  </a>
+  <Navigation
+    class="navigation"
+  />
 </header>
 
 
 <style scoped>
   header {
-    padding-block: 2rem;
-    color: var(--color-primary);
-  }
-  .container {
     display: grid;
+    padding: 2rem;
     grid-template-columns: 1fr auto;
     grid-template-areas: 'logo navigation';
     gap: 2rem;
-    align-items: center;
-    justify-content: center;
+    color: var(--color-primary);
   }
   .logo {
     --gap: 2rem;
     display: inline-flex;
-    justify-content: center;
     align-items: center;
     grid-area: logo;
     gap: var(--gap);
@@ -57,11 +51,14 @@ const currentPath = Astro.url.pathname
 
 
   @media (max-width: 1200px) {
-    .container {
+    header {
       grid-template-columns: auto;
       grid-template-areas:
         'logo'
         'navigation';
+    }
+    .logo {
+      justify-content: center;
     }
   }
   @media (max-width: 700px) {
