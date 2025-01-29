@@ -32,19 +32,19 @@ import dates from '@/config'
 
 <style scoped>
   h1 {
-    font-size: 5rem;
+    font-size: clamp(3rem, 5vw, 5rem);
     font-weight: 900;
     color: var(--color-primary);
     text-align: center;
     line-height: 1;
     > small {
-      font-size: 3rem;
+      font-size: clamp(1.5rem, 2.5vw, 3rem);
       font-weight: 500;
     }
   }
   p,
   li {
-    font-size: 1.5rem;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
     text-align: center;
   }
   p {

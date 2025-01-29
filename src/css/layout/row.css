@@ -1,14 +1,22 @@
 .l-row {
+  --gap: 2rem;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: var(--gap);
 }
 .l-row--small {
-  gap: 1rem;
+  --gap: 1rem;
 }
 .l-row--x-small {
-  gap: 0.5rem;
+  --gap: 0.5rem;
 }
 .l-row__fill {
   flex-grow: 1;
 }
+
+@media (max-width: 600px) {
+  .l-row {
+    --gap: 1rem;
+  }
+}
+

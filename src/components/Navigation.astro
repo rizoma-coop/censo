@@ -1,5 +1,6 @@
 ﻿---
 import Logout from './Logout.vue'
+import isSurveyAvailable from '@/utils/isSurveyAvailable'
 const currentPath = Astro.url.pathname
 
 const pages = [
@@ -9,7 +10,8 @@ const pages = [
   },
   {
     label: 'Censo',
-    href: '/censo'
+    href: '/censo',
+    notAvailable: !isSurveyAvailable
   },
   {
     label: 'Dashboard',
@@ -29,9 +31,11 @@ const pages = [
   {
     <ul>
       {pages.map((page) => (
-        <li class={page.isAdmin ? 'is-visible-logged-in' : ''}>
-          <a href={page.href} class={currentPath === page.href ? 'active' : ''}>{page.label}</a>
-        </li>
+        page.notAvailable ? null : (
+          <li class={page.isAdmin ? 'is-visible-logged-in' : ''}>
+            <a href={page.href} class={currentPath === page.href ? 'active' : ''}>{page.label}</a>
+          </li>
+        )
       ))}
       <li class="is-visible-logged-in">
         <Logout client:load>Sair</Logout>
@@ -46,6 +50,8 @@ const pages = [
   ul {
     display: flex;
     gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   a {
     padding: .2rem 0.5rem;
@@ -60,4 +66,11 @@ const pages = [
   body.is-logged-in .is-visible-logged-in {
     display: block;
   }
+
+  @media (max-width: 700px) {
+    ul {
+      gap: 1rem;
+    }
+  }
 </style>
+
