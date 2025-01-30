@@ -11,7 +11,7 @@ export default defineConfig({
   integrations: [vue(), sentry({
     dsn: 'https://646a1ed8c1e8c353250febd5c6cd90df@o4508733140959232.ingest.de.sentry.io/4508733143842896',
     sourceMapsUploadOptions: {
-      project: 'javascript-astro',
+      project: 'censo-rizoma',
       authToken: process.env.SENTRY_AUTH_TOKEN,
     },
   })]
