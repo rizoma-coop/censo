@@ -20,23 +20,21 @@ import Footer from '@/components/Footer.astro'
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 
-  <script type="text/javascript" src="https://unpkg.com/survey-core/survey.core.min.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
-
-  <script type="text/javascript" src="https://unpkg.com/survey-creator-core/survey-creator-core.min.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/survey-creator-js/survey-creator-js.min.js"></script>
-
 </head>
 <body>
-  <Header />
-  <main class="l-container l-stack l-stack--large">
-    <slot />
-  </main>
-  <Footer />
+  <div class="l-wrapper">
+    <Header />
+    <main class="l-container l-stack l-stack--large">
+      <slot />
+    </main>
+    <Footer />
+  </div>
 
-  <script>
-    import loggedInClass from '@/utils/loggedInClass'
-    loggedInClass.toggle()
-  </script>
+  <script type="text/javascript" src="/vendor/survey.core.min.js"></script>
+  <script type="text/javascript" src="/vendor/survey-js-ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendor/survey-creator-core.min.js"></script>
+  <script type="text/javascript" src="/vendor/survey-creator-js.min.js"></script>
+  <script src="main.ts"></script>
 </body>
 </html>

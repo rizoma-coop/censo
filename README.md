@@ -1,1 +1,2 @@
-# censo
+# Censo RizomaCoop 2025
+

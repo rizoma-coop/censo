@@ -2,6 +2,7 @@
 @import 'base/reset.css';
 @import 'base/structure.css';
 
+@import 'layout/wrapper.css';
 @import 'layout/container.css';
 @import 'layout/row.css';
 @import 'layout/stack.css';
