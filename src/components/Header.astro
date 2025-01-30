@@ -15,18 +15,17 @@ import Navigation from './Navigation.astro'
     </figure>
     <h1>Censo Rizoma 2025</h1>
   </a>
-  <Navigation
-    class="navigation is-visible-logged-in"
-  />
+  <div class="navigation is-visible-logged-in">
+    <Navigation />
+  </div>
 </header>
 
 
 <style scoped>
   header {
-    display: grid;
+    display: flex;
+    justify-content: center;
     padding: 2rem;
-    grid-template-columns: 1fr auto;
-    grid-template-areas: 'logo navigation';
     gap: 2rem;
     color: var(--color-primary);
   }
@@ -34,7 +33,6 @@ import Navigation from './Navigation.astro'
     --gap: 2rem;
     display: inline-flex;
     align-items: center;
-    grid-area: logo;
     gap: var(--gap);
     > figure {
       border-inline-end: 1px solid var(--color-primary);
@@ -46,18 +44,20 @@ import Navigation from './Navigation.astro'
     font-size: 1.5rem;
   }
   .navigation {
-    grid-area: navigation;
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
   }
 
 
   @media (max-width: 1200px) {
     header {
-      grid-template-columns: auto;
-      grid-template-areas:
-        'logo'
-        'navigation';
+      flex-direction: column;
     }
     .logo {
+      justify-content: center;
+    }
+    .navigation {
       justify-content: center;
     }
   }
