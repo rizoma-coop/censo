@@ -3,13 +3,21 @@ import { ref } from 'vue'
 import api from '@/utils/api'
 import Button from './Button.vue'
 
+const props = defineProps({
+  surveyId: {
+    type: String,
+    required: true
+  }
+})
+
 const isLoading = ref(false)
 const surveyStarted = ref(false)
+const surveyComplete = ref(false)
 
 async function renderSurvey() {
   isLoading.value = true
 
-  const { data } = await api.get('surveys?id=survey-rizoma-2025')
+  const { data } = await api.GET(`survey?id=${props.surveyId}`)
 
   isLoading.value = false
   if (data) {
@@ -17,9 +25,24 @@ async function renderSurvey() {
 
     // @ts-ignore
     const survey = new Survey.Model(surveyJson)
-    
+
     survey.render(document.getElementById('surveyContainer'))
     surveyStarted.value = true
+
+    survey.onComplete.add(saveAnswer)
+  }
+}
+
+async function saveAnswer(sender: any) {
+
+  const {data, error} = await api.POST('answer', {
+    answer: JSON.stringify(sender.data)
+  })
+
+  if (!error) {
+    surveyComplete.value = true
+  } else {
+    alert('Ocorreu um erro ao gravar a tua resposta. Por favor, tenta novamente.')
   }
 }
 
@@ -37,6 +60,10 @@ async function renderSurvey() {
     </div>
   </div>
   <div id="surveyContainer"></div>
+
+  <div v-if="surveyComplete">
+    <p>Obrigado pela tua participação!</p>
+  </div>
 </template>
 
 

@@ -2,12 +2,14 @@
 import Layout from '@/layouts/layout.astro'
 import AuthProvider from '@/components/AuthProvider.vue'
 import SurveyCreator from '@/components/SurveyCreator.vue'
+
+const surveyId = import.meta.env.SURVEY_ID
 ---
 
 <Layout>
   <div id="authContainer">
     <AuthProvider client:load>
-      <SurveyCreator client:load />
+      <SurveyCreator client:load surveyId={surveyId} />
     </AuthProvider>
   </div>
 </Layout>

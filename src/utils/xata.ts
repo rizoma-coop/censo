@@ -16,7 +16,15 @@ const tables = [
         definition: "CHECK ((length(xata_id) < 256))",
       },
     },
-    foreignKeys: {},
+    foreignKeys: {
+      survey_link: {
+        name: "survey_link",
+        columns: ["survey"],
+        referencedTable: "surveys",
+        referencedColumns: ["xata_id"],
+        onDelete: "SET NULL",
+      },
+    },
     primaryKey: [],
     uniqueConstraints: {
       _pgroll_new_answers_xata_id_key: {
@@ -32,6 +40,15 @@ const tables = [
         unique: false,
         defaultValue: null,
         comment: "",
+      },
+      {
+        name: "survey",
+        type: "link",
+        link: { table: "surveys" },
+        notNull: true,
+        unique: false,
+        defaultValue: null,
+        comment: '{"xata.link":"surveys"}',
       },
       {
         name: "xata_createdat",

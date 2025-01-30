@@ -1,9 +1,11 @@
 ﻿---
 import Layout from '@/layouts/layout.astro'
 import Survey from '@/components/Survey.vue'
+
+const surveyId = import.meta.env.SURVEY_ID
 ---
 
 <Layout>
   <h1>Censo</h1>
-  <Survey client:load />
+  <Survey client:load surveyId={surveyId} />
 </Layout>

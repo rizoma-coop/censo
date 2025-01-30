@@ -33,10 +33,21 @@ export const GET: APIRoute = async ({ request }) => {
   }
 }
 
-export const POST: APIRoute = async ({ request }) => {
+export const PUT: APIRoute = async ({ request }) => {
   const body = await request.json()
-  console.log(body)
-  return new Response(JSON.stringify(body), {
-    status: 200,
-  })
+
+  try {
+    const response = await xata.surveys.update(
+      body.id,
+      {survey: body.survey}
+    )
+
+    return new Response(JSON.stringify(response), {
+      status: 200,
+    })
+  } catch (error: any) {
+    return new Response(JSON.stringify(error.errors), {
+      status: error.status,
+    })
+  }
 }

@@ -1,7 +1,6 @@
 const fetchApi = async (endpoint: string, options?: object) => {
   const response = await fetch(`/api/${endpoint}`, options)
   const data = await response.json()
-
   return {
     data,
     error: !response.ok,
@@ -9,14 +8,14 @@ const fetchApi = async (endpoint: string, options?: object) => {
 }
 
 export default {
-  get: async (endpoint: string, options?: object) => {
+  GET: async (endpoint: string, options?: object) => {
     const response = await fetchApi(endpoint, {
       ...options,
       method: 'GET',
     })
     return response
   },
-  post: async (endpoint: string, body: any, options?: object) => {
+  POST: async (endpoint: string, body: any, options?: object) => {
     const response = await fetchApi(endpoint, {
       ...options,
       headers: {
@@ -28,7 +27,7 @@ export default {
     })
     return response
   },
-  put: async (endpoint: string, body: any, options?: object) => {
+  PUT: async (endpoint: string, body: any, options?: object) => {
     const response = await fetchApi(endpoint, {
       ...options,
       headers: {
@@ -40,7 +39,7 @@ export default {
     })
     return response
   },
-  delete: async (endpoint: string, options?: object) => {
+  DELETE: async (endpoint: string, options?: object) => {
     const response = await fetchApi(endpoint, {
       ...options,
       method: 'DELETE',

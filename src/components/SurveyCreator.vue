@@ -1,13 +1,21 @@
 ﻿<script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import api from '@/utils/api'
+import Loading from '@/components/Loading.vue'
 
-const isLoading = ref(true)
+const props = defineProps({
+  surveyId: {
+    type: String,
+    required: true
+  }
+})
 
 const creatorOptions = {
   showLogicTab: true,
   isAutoSave: true
 }
+
+const isLoading = ref(true)
 
 onMounted(() => {
   renderSurveyCreator()
@@ -15,7 +23,7 @@ onMounted(() => {
 
 async function renderSurveyCreator() {
 
-  const { data } = await api.get('surveys?id=survey-rizoma-2025')
+  const { data } = await api.GET(`survey?id=${props.surveyId}`)
 
   isLoading.value = false
   if (data) {
@@ -23,9 +31,15 @@ async function renderSurveyCreator() {
     // @ts-ignore
     const creator = new SurveyCreator.SurveyCreator(creatorOptions)
     creator.text = JSON.stringify(data.survey)
-    creator.saveSurveyFunc = (saveNo: any, callback: any) => { 
-      console.log('saveNo', saveNo)
-      console.log('callback', callback)
+    creator.saveSurveyFunc = async () => {
+      const response = await api.PUT('survey', {
+        id: props.surveyId,
+        survey: creator.text,
+      })
+
+      if (response.error) {
+        alert('Não foi possível gravar o questionário')
+      }
     }
     
     creator.render(document.getElementById('surveyCreatorContainer'))
@@ -34,7 +48,9 @@ async function renderSurveyCreator() {
 </script>
 
 <template>
-  <div id="surveyCreatorContainer"></div>
+  <div id="surveyCreatorContainer">
+    <Loading client:load />
+  </div>
 </template>
 
 <style>

@@ -4,6 +4,7 @@ import api from '@/utils/api'
 import Button from '@/components/Button.vue'
 import Input from '@/components/Input.vue'
 import loggedInClass from '@/utils/loggedInClass'
+import Loading from '@/components/Loading.vue'
 
 import { ref, onMounted } from 'vue'
 
@@ -16,7 +17,7 @@ onMounted(async () => {
   if (passwordId) {
 
     isLoading.value = true
-    const { data } = await api.get(`auth?passwordId=${passwordId}`)
+    const { data } = await api.GET(`auth?passwordId=${passwordId}`)
     isLoggedIn.value = !!data.passwordId
     if (isLoggedIn.value) {
       loggedInClass.add()
@@ -29,7 +30,7 @@ async function handleSubmit(event: Event) {
   const password = (event.target as HTMLFormElement).password.value
   
   isLoading.value = true
-  const { data } = await api.get(`auth?password=${password}`)
+  const { data } = await api.GET(`auth?password=${password}`)
   isLoading.value = false  
 
   if (data.passwordId) {
@@ -37,14 +38,14 @@ async function handleSubmit(event: Event) {
     localStorage.setItem('passwordId', data.passwordId)
     loggedInClass.add()
   } else {
-    alert('Wrong password')
+    alert('Password errada')
   }
 }
 
 </script>
 
 <template>
-  <p v-if="isLoading">Loading...</p>
+  <Loading v-if="isLoading" />
   <template v-else>
     <template v-if="isLoggedIn">
       <slot />

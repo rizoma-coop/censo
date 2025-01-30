@@ -1,6 +1,6 @@
 {
   "databaseURL": "https://Emanuel-Saramago-s-workspace-r8e5qt.eu-central-1.xata.sh/db/censo-rizoma",
   "codegen": {
-    "output": "src/xata.ts"
+    "output": "src/utils/xata.ts"
   }
 }
