@@ -8,4 +8,13 @@ const surveyId = import.meta.env.SURVEY_ID
 <Layout>
   <h1>Censo</h1>
   <Survey client:load surveyId={surveyId} />
+
+  <button id="error-button" class="is-visible-logged-in">Throw test error</button>
 </Layout>
+
+<script>
+  function handleClick () {
+    throw new Error('This is a test error');
+  }
+  document.querySelector("#error-button")?.addEventListener("click", handleClick);
+</script>
