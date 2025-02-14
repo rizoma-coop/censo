@@ -1,0 +1,25 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cunkpg60tnqbju14abd0",
+    "operations": [
+      {
+        "add_column": {
+          "table": "surveys",
+          "column": {
+            "name": "introduction",
+            "type": "text",
+            "comment": "",
+            "default": "'O Censo Rizoma é uma iniciativa da RizomaCoop, que visa perceber a população da cooperativa.\n\nDemora entre 8 e 10 minutos.\nÉ completamente anónimo.'",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cunkpg60tnqbju14abd0",
+  "parent": "mig_cunkpbm0tnqbju14abc0",
+  "schema": "public",
+  "startedAt": "2025-02-14T14:01:36.758423Z"
+}

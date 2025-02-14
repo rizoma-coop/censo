@@ -1,0 +1,40 @@
+---
+import api from '@/utils/api'
+import type { Status } from '@/types'
+import type { SurveysRecord } from '@/utils/xata'
+
+interface Props {
+  status?: Status
+}
+const { status } = Astro.props as Props
+
+const { data } = await api.GET(`surveys?status=${status}`)
+
+const surveys = data && data.length > 0 ? data : null
+---
+
+{
+  surveys ? (
+    <ul>
+      {surveys.map((survey: SurveysRecord) => (
+        <li>
+          <a href={`/inquerito/${survey.xata_id}/`}>{survey.title}</a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>Sem inquéritos para mostrar</p>
+  )
+}
+
+<style>
+  a {
+    display: inline-block;
+    padding: 1rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 1rem;
+    font-weight: 600;
+    background-color: var(--color-primary);
+    color: #FFF;
+  }
+</style>

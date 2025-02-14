@@ -1,7 +1,34 @@
 ﻿<script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import api from '@/utils/api'
 import Button from './Button.vue'
+import type { SurveysRecord } from '@/utils/xata'
+import Loading from '@/components/Loading.vue'
+
+type Period = 'before' | 'during' | 'after'
+
+const survey = ref<SurveysRecord | null>(null)
+
+onMounted(async () => {
+  survey.value = await getSurvey()
+})
+
+const period = computed(() => {
+  if (survey) {
+    const today = new Date()
+    const start = new Date(survey.start)
+    const end = new Date(survey.end)
+    if (today.getTime() < start.getTime()) {
+      return 'before'
+    } else if (today.getTime() > end.getTime()) {
+      return 'after'
+    } else {
+      return 'during'
+    }
+  } else {
+    return null
+  }
+})
 
 const props = defineProps({
   surveyId: {
@@ -14,16 +41,15 @@ const isLoading = ref(false)
 const surveyStarted = ref(false)
 const surveyComplete = ref(false)
 
-async function renderSurvey() {
+async function getSurvey() {
   isLoading.value = true
-
   const { data } = await api.GET(`survey?id=${props.surveyId}`)
-
   isLoading.value = false
-  if (data) {
-    const surveyJson = data.survey
+  return data
+}
 
-    // @ts-ignore
+function renderSurvey(surveyJson: string) {
+  if (surveyJson) {
     const survey = new Survey.Model(surveyJson)
 
     survey.render(document.getElementById('surveyContainer'))
@@ -36,6 +62,7 @@ async function renderSurvey() {
 async function saveAnswer(sender: any) {
 
   const {data, error} = await api.POST('answer', {
+    surveyId: props.surveyId,
     answer: JSON.stringify(sender.data)
   })
 
@@ -49,21 +76,39 @@ async function saveAnswer(sender: any) {
 </script>
 
 <template>
-  <div v-if="!surveyStarted" class="l-stack">
-    <p>O Censo Rizoma é uma iniciativa da RizomaCoop, que visa perceber a população da cooperativa.</p>
-    <ul>
-      <li>Demora entre 8 e 10 minutos.</li>
-      <li>É completamente anónimo.</li>
-    </ul>
-    <div>
-      <Button @click="renderSurvey">Iniciar</Button>
-    </div>
-  </div>
-  <div id="surveyContainer"></div>
 
-  <div v-if="surveyComplete">
-    <p>Obrigado pela tua participação!</p>
-  </div>
+  <template v-if="isLoading || !survey">
+    <Loading />
+  </template>
+  <template v-else>
+    <div v-if="!surveyStarted" class="l-stack">
+
+      <div v-if="survey.introduction" v-html="survey.introduction" class="l-stack"></div>
+
+      <p v-if="survey.start && survey.end">Período: de {{new Date(survey.start).toLocaleDateString()}} a {{new Date(survey.end).toLocaleDateString()}}</p>
+
+      <template v-if="period === 'before'">
+        <p>O {{survey.title}} está a ser preparado.</p>
+        <p>Estará disponível entre os dias {{ new Date(survey.start).toLocaleDateString('pt-PT') }} e {{ new Date(survey.end).toLocaleDateString('pt-PT') }}.</p>
+      </template>
+      <template v-else-if="period === 'during'">
+        <p>Preenche o {{survey.title}} até dia {{ new Date(survey.end).toLocaleDateString('pt-PT') }}.</p>
+        <div class="l-row l-row--small">
+          <Button @click="() => renderSurvey(survey.survey)">Iniciar</Button>
+          <Button class="is-visible-logged-in" :href="`/inquerito/${survey.xata_id}/editor`">Editar</Button>
+        </div>
+      </template>
+      <template v-else>
+        <p>O {{survey.title}} já terminou. Vamos disponibilizar os resultados em breve.</p>
+      </template>
+
+    </div>
+    <div id="surveyContainer"></div>
+
+    <div v-if="surveyComplete">
+      <p>Obrigado pela tua participação!</p>
+    </div>
+  </template>
 </template>
 
 

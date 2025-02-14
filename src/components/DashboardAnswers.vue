@@ -8,7 +8,7 @@ const answers = ref<number | null>(null)
 
 onMounted(async () => {
 
-  const { data, error } = await api.GET('answers')
+  const { data, error } = await api.GET(`answers?surveyId=survey-comunicacao-comunidade`)
   isLoading.value = false
 
   if (!error) {

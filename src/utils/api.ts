@@ -1,5 +1,7 @@
+const BASE_URL = import.meta.env.PUBLIC_BASE_URL
+
 const fetchApi = async (endpoint: string, options?: object) => {
-  const response = await fetch(`/api/${endpoint}`, options)
+  const response = await fetch(`${BASE_URL}/api/${endpoint}`, options)
   const data = await response.json()
   return {
     data,

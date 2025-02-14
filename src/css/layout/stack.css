@@ -1,8 +1,8 @@
 ﻿.l-stack {
-  --default-gap: 2rem;
+  --default-gap: 1rem;
   display: flex;
   flex-direction: column;
-  gap: var(--default-gap);
+  gap: var(--gap);
 }
 .l-stack--small {
   --gap: calc(var(--default-gap) / 2);

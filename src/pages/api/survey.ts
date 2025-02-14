@@ -11,7 +11,6 @@ export const GET: APIRoute = async ({ request }) => {
 
     if (surveyId) {
       const response = await xata.surveys
-        .select(['survey'])
         .filter({
           xata_id: surveyId
         })

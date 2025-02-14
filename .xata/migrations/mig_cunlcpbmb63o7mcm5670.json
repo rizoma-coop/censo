@@ -1,0 +1,28 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cunlcpbmb63o7mcm5670",
+    "operations": [
+      {
+        "add_column": {
+          "table": "surveys",
+          "column": {
+            "name": "introduction2",
+            "type": "real[]",
+            "check": {
+              "name": "surveys_xata_vector_length_introduction2",
+              "constraint": "ARRAY_LENGTH(\"introduction2\", 1) = 1536"
+            },
+            "comment": "{\"xata.search.dimension\":1536}",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cunlcpbmb63o7mcm5670",
+  "parent": "mig_cunkpp60tnqbju14abf0",
+  "schema": "public",
+  "startedAt": "2025-02-14T14:42:46.098678Z"
+}

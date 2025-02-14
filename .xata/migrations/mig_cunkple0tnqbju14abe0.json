@@ -1,0 +1,19 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cunkple0tnqbju14abe0",
+    "operations": [
+      {
+        "drop_column": {
+          "table": "surveys",
+          "column": "introduction"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cunkple0tnqbju14abe0",
+  "parent": "mig_cunkpg60tnqbju14abd0",
+  "schema": "public",
+  "startedAt": "2025-02-14T14:01:58.839907Z"
+}
