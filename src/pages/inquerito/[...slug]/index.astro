@@ -1,16 +1,16 @@
 ---
 export const prerender = false
 
-import Layout from '@/layouts/layout.astro'
+import LayoutSurvey from '@/layouts/layoutSurvey.astro'
 import Survey from '@/components/Survey.vue'
 
 const { slug } = Astro.params
 
 ---
 
-<Layout>
+<LayoutSurvey>
   <Survey
     client:load
     surveyId={slug || ''}
   />
-</Layout>
+</LayoutSurvey>

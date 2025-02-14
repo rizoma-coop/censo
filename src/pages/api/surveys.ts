@@ -1,8 +1,8 @@
+export const prerender = false
+
 import type { APIRoute } from 'astro'
 import xata from '@/utils/xataClient'
 import type { Status } from '@/types'
-
-export const prerender = false
 
 export const GET: APIRoute = async ({ request }) => {
 
@@ -23,7 +23,11 @@ export const GET: APIRoute = async ({ request }) => {
       }
     } else if (status === 'future') {
       filter = {
-        start: { $gt: now }
+        $any: [
+          {
+            start: { $gt: now }
+          }
+        ]
       }
     }
 

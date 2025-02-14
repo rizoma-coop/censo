@@ -1,20 +1,20 @@
 ﻿---
 export const prerender = false
 
-import Layout from '@/layouts/layout.astro'
+import LayoutSurvey from '@/layouts/layoutSurvey.astro'
 import AuthProvider from '@/components/AuthProvider.vue'
 import SurveyCreator from '@/components/SurveyCreator.vue'
 
-const surveyId = import.meta.env.SURVEY_ID
+const { slug } = Astro.params
 ---
 
-<Layout>
+<LayoutSurvey>
   <div id="authContainer">
     <AuthProvider client:load>
-      <SurveyCreator client:load surveyId={surveyId} />
+      <SurveyCreator client:load surveyId={slug || ''} />
     </AuthProvider>
   </div>
-</Layout>
+</LayoutSurvey>
 
 <style>
   #authContainer {

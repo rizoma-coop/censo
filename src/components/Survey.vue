@@ -7,27 +7,12 @@ import Loading from '@/components/Loading.vue'
 
 type Period = 'before' | 'during' | 'after'
 
+const period = ref<Period>('before')
 const survey = ref<SurveysRecord | null>(null)
 
 onMounted(async () => {
   survey.value = await getSurvey()
-})
-
-const period = computed(() => {
-  if (survey) {
-    const today = new Date()
-    const start = new Date(survey.start)
-    const end = new Date(survey.end)
-    if (today.getTime() < start.getTime()) {
-      return 'before'
-    } else if (today.getTime() > end.getTime()) {
-      return 'after'
-    } else {
-      return 'during'
-    }
-  } else {
-    return null
-  }
+  period.value = getPeriod(survey.value)
 })
 
 const props = defineProps({
@@ -48,8 +33,13 @@ async function getSurvey() {
   return data
 }
 
-function renderSurvey(surveyJson: string) {
+function renderSurvey() {
+
+  const surveyJson = survey.value?.survey
+
   if (surveyJson) {
+
+    //@ts-ignore
     const survey = new Survey.Model(surveyJson)
 
     survey.render(document.getElementById('surveyContainer'))
@@ -73,34 +63,49 @@ async function saveAnswer(sender: any) {
   }
 }
 
+function getPeriod(survey: SurveysRecord | null): Period {
+  if (survey && survey.start && survey.end) {
+    const today = new Date()
+    const start = new Date(survey.start)
+    const end = new Date(survey.end)
+
+    if (today.getTime() < start.getTime()) {
+      return 'before'
+    } else if (today.getTime() > end.getTime()) {
+      return 'after'
+    } else {
+      return 'during'
+    }
+  } else {
+    return 'before'
+  }
+}
+
 </script>
 
 <template>
 
-  <template v-if="isLoading || !survey">
-    <Loading />
-  </template>
+  <Loading v-if="isLoading || !survey" />
   <template v-else>
     <div v-if="!surveyStarted" class="l-stack">
 
       <div v-if="survey.introduction" v-html="survey.introduction" class="l-stack"></div>
 
-      <p v-if="survey.start && survey.end">Período: de {{new Date(survey.start).toLocaleDateString()}} a {{new Date(survey.end).toLocaleDateString()}}</p>
+      <p v-if="survey.start && survey.end">Período: de {{new Date(survey.start).toLocaleDateString('pt-PT')}} a {{new Date(survey.end).toLocaleDateString('pt-PT')}}</p>
 
       <template v-if="period === 'before'">
         <p>O {{survey.title}} está a ser preparado.</p>
-        <p>Estará disponível entre os dias {{ new Date(survey.start).toLocaleDateString('pt-PT') }} e {{ new Date(survey.end).toLocaleDateString('pt-PT') }}.</p>
+        <p v-if="survey.start && survey.end">Estará disponível entre os dias {{ new Date(survey.start).toLocaleDateString('pt-PT') }} e {{ new Date(survey.end).toLocaleDateString('pt-PT') }}.</p>
       </template>
       <template v-else-if="period === 'during'">
-        <p>Preenche o {{survey.title}} até dia {{ new Date(survey.end).toLocaleDateString('pt-PT') }}.</p>
-        <div class="l-row l-row--small">
-          <Button @click="() => renderSurvey(survey.survey)">Iniciar</Button>
-          <Button class="is-visible-logged-in" :href="`/inquerito/${survey.xata_id}/editor`">Editar</Button>
-        </div>
+        <p v-if="survey.end">Preenche o {{survey.title}} até dia {{ new Date(survey.end).toLocaleDateString('pt-PT') }}.</p>
       </template>
       <template v-else>
         <p>O {{survey.title}} já terminou. Vamos disponibilizar os resultados em breve.</p>
       </template>
+      <div class="l-row l-row--small" v-if="period === 'during'">
+        <Button @click="renderSurvey">Iniciar</Button>
+      </div>
 
     </div>
     <div id="surveyContainer"></div>

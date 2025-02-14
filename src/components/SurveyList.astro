@@ -18,7 +18,7 @@ const surveys = data && data.length > 0 ? data : null
     <ul>
       {surveys.map((survey: SurveysRecord) => (
         <li>
-          <a href={`/inquerito/${survey.xata_id}/`}>{survey.title}</a>
+          <a href={`/inquerito/${survey.xata_id}`}>{survey.title}</a>
         </li>
       ))}
     </ul>

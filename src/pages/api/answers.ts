@@ -1,5 +1,8 @@
-﻿import xata from '@/utils/xataClient'
+﻿export const prerender = false
+
+import xata from '@/utils/xataClient'
 import type { APIRoute } from 'astro'
+
 
 export const GET: APIRoute = async ({ request }) => {
   try {
