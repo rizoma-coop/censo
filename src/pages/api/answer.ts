@@ -8,14 +8,20 @@ export const POST: APIRoute = async ({ request }) => {
   const body = await request.json()
 
   try {
-    const response = await xata.answers.create({
-      answer: body.answer,
-      survey: import.meta.env.SURVEY_ID
-    })
+    if (body.surveyId) {
+      const response = await xata.answers.create({
+        answer: body.answer,
+        survey: body.surveyId
+      })
 
-    return new Response(JSON.stringify(response), {
-      status: 200,
-    })
+      return new Response(JSON.stringify(response), {
+        status: 200,
+      })
+    } else {
+      return new Response(JSON.stringify('Survey não encontrado'), {
+        status: 400,
+      })
+    }
   } catch (error: any) {
     return new Response(JSON.stringify(error.errors), {
       status: error.status,

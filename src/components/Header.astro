@@ -7,13 +7,13 @@ import Navigation from './Navigation.astro'
 <header>
   <a href="/" class="logo">
     <figure>
-      <Image 
-        src={logo} 
+      <Image
+        src={logo}
         alt="Logótipo Rizoma"
         width={80}
       />
     </figure>
-    <h1>Censo Rizoma 2025</h1>
+    <h1>Inquéritos da RizomaCoop</h1>
   </a>
   <div class="navigation is-visible-logged-in">
     <Navigation />
@@ -24,7 +24,6 @@ import Navigation from './Navigation.astro'
 <style scoped>
   header {
     display: flex;
-    justify-content: center;
     padding: 2rem 2rem 3rem;
     gap: 2rem;
     color: var(--color-primary);
@@ -32,16 +31,16 @@ import Navigation from './Navigation.astro'
   .logo {
     --gap: 2rem;
     display: inline-flex;
-    align-items: center;
+    align-items: stretch;
     gap: var(--gap);
-    > figure {
-      border-inline-end: 1px solid var(--color-primary);
-      padding-inline-end: var(--gap);
-    }
   }
   h1 {
+    display: flex;
+    align-items: center;
     font-weight: 500;
     font-size: 1.5rem;
+    border-inline-start: 1px solid var(--color-primary);
+    padding-inline-start: var(--gap);
   }
   .navigation {
     display: flex;
@@ -54,9 +53,7 @@ import Navigation from './Navigation.astro'
     header {
       flex-direction: column;
     }
-    .logo {
-      justify-content: center;
-    }
+    .logo,
     .navigation {
       justify-content: center;
     }

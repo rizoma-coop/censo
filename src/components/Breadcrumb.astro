@@ -1,0 +1,20 @@
+---
+const {label, href} = Astro.props
+---
+
+<li>
+  {
+    href ? (
+      <a href={href}>
+        {label}
+      </a>
+    ): (label)
+  }
+</li>
+
+<style>
+  a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+</style>

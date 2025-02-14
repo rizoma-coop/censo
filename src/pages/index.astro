@@ -1,32 +1,24 @@
 ﻿---
 import Layout from '@/layouts/layout.astro'
-import SurveyIntro from '@/components/SurveyIntro.vue'
-
-const surveyStartDate = new Date(import.meta.env.SURVEY_START_DATE)
-const surveyEndDate = new Date(import.meta.env.SURVEY_END_DATE)
+import SurveyList from '@/components/SurveyList.astro'
 ---
 
 <Layout>
   <h1>
-    <small>Bem-vindo ao</small><br>
-    Censo Rizoma<br>
-    2025
+    <small>Plataforma de inquéritos da</small><br>
+    RizomaCoop
   </h1>
-  <p>O Censo Rizoma é uma iniciativa da RizomaCoop, que visa perceber a população da cooperativa.</p>
 
-  <SurveyIntro
-    client:load
-    surveyStartDate={surveyStartDate}
-    surveyEndDate={surveyEndDate}
-  />
+  <div class="l-stack l-stack--x-small">
+    <h2>Inquéritos a decorrer</h2>
+    <SurveyList status="current" />
+  </div>
+  <div class="l-stack l-stack--x-small">
+    <h2>Inquéritos futuros</h2>
+    <SurveyList status="future" />
+  </div>
+
 </Layout>
-
-<style is:global>
-  main {
-    justify-content: center;
-    align-items: center;
-  }
-</style>
 
 <style scoped>
   h1 {
@@ -35,16 +27,17 @@ const surveyEndDate = new Date(import.meta.env.SURVEY_END_DATE)
     color: var(--color-primary);
     text-align: center;
     line-height: 1;
+    max-width: 800px;
+    width: 100%;
+    margin-inline: auto;
     > small {
       font-size: clamp(1rem, 2.5vw, 2.5rem);
       font-weight: 500;
     }
   }
-  p {
-    font-size: clamp(1rem, 2.5vw, 2rem);
-    text-align: center;
-  }
-  p {
-    max-width: 800px;
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--color-neutral-70);
   }
 </style>

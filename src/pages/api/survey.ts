@@ -1,7 +1,7 @@
-﻿import type { APIRoute } from 'astro'
-import xata from '@/utils/xataClient'
+﻿export const prerender = false
 
-export const prerender = false
+import type { APIRoute } from 'astro'
+import xata from '@/utils/xataClient'
 
 export const GET: APIRoute = async ({ request }) => {
 
@@ -11,7 +11,6 @@ export const GET: APIRoute = async ({ request }) => {
 
     if (surveyId) {
       const response = await xata.surveys
-        .select(['survey'])
         .filter({
           xata_id: surveyId
         })

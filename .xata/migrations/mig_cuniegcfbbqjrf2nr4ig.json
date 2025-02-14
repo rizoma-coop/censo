@@ -1,0 +1,22 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cuniegcfbbqjrf2nr4ig",
+    "operations": [
+      {
+        "alter_column": {
+          "up": "(SELECT CASE WHEN \"title\" IS NULL THEN '' ELSE \"title\" END)",
+          "down": "(SELECT CASE WHEN \"title\" IS NULL THEN '' ELSE \"title\" END)",
+          "table": "surveys",
+          "column": "title",
+          "nullable": false
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cuniegcfbbqjrf2nr4ig",
+  "parent": "mig_cunie2sfbbqjrf2nr4hg",
+  "schema": "public",
+  "startedAt": "2025-02-14T11:21:37.515558Z"
+}

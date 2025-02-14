@@ -1,0 +1,24 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cunkpp60tnqbju14abf0",
+    "operations": [
+      {
+        "add_column": {
+          "table": "surveys",
+          "column": {
+            "name": "introduction",
+            "type": "text",
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cunkpp60tnqbju14abf0",
+  "parent": "mig_cunkple0tnqbju14abe0",
+  "schema": "public",
+  "startedAt": "2025-02-14T14:02:12.865625Z"
+}

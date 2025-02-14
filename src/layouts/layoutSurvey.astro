@@ -1,0 +1,49 @@
+---
+import Layout from './layout.astro'
+import Button from '@/components/Button.vue'
+import ButtonGroup from '@/components/ButtonGroup.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Breadcrumb from '@/components/Breadcrumb.astro'
+import api from '@/utils/api'
+
+const { slug } = Astro.params
+const { data } = await api.GET(`survey?id=${slug}`)
+const survey = data ? data : null
+
+const currentPath = Astro.url.pathname
+
+const pages = [
+  {
+    url: `/inquerito/${slug}`,
+    label: 'Início'
+  },
+  {
+    url: `/inquerito/${slug}/editor`,
+    label: 'Editar'
+  },
+  {
+    url: `/inquerito/${slug}/results`,
+    label: 'Resultados'
+  },
+]
+---
+
+<Layout>
+
+  <Breadcrumbs>
+    <Breadcrumb label="Inquéritos" href="/" /> >
+    <Breadcrumb label={survey.title} />
+  </Breadcrumbs>
+
+  <h1>{survey.title}</h1>
+
+  <ButtonGroup class="is-visible-logged-in">
+    {
+      pages.map(page => (
+        <Button href={page.url} outline={currentPath === page.url} size="small">{page.label}</Button>
+      ))
+    }
+  </ButtonGroup>
+
+  <slot />
+</Layout>
