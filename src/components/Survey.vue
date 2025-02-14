@@ -1,5 +1,5 @@
 ﻿<script lang="ts" setup>
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref } from 'vue'
 import api from '@/utils/api'
 import Button from './Button.vue'
 import type { SurveysRecord } from '@/utils/xata'
