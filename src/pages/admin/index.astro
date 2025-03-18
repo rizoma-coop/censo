@@ -6,21 +6,21 @@ import SurveyList from '@/components/SurveyList.astro'
 ---
 
 <Layout>
-  <AuthProvider client:load>
+  <AuthProvider server:defer>
     <h1>Inquéritos</h1>
 
     <div class="l-row l-row--start l-row--large">
       <div class="l-stack l-stack--x-small">
         <h2>Inquéritos passados</h2>
-        <SurveyList status="previous" />
+        <SurveyList status="previous" server:defer />
       </div>
       <div class="l-stack l-stack--x-small">
         <h2>Inquéritos a decorrer</h2>
-        <SurveyList status="current" />
+        <SurveyList status="current" server:defer />
       </div>
       <div class="l-stack l-stack--x-small">
         <h2>Inquéritos futuros</h2>
-        <SurveyList status="future" />
+        <SurveyList status="future" server:defer />
       </div>
     </div>
   </AuthProvider>

@@ -11,11 +11,11 @@ import SurveyList from '@/components/SurveyList.astro'
 
   <div class="l-stack l-stack--x-small">
     <h2>Inquéritos a decorrer</h2>
-    <SurveyList status="current" />
+    <SurveyList status="current" server:defer />
   </div>
   <div class="l-stack l-stack--x-small">
     <h2>Inquéritos futuros</h2>
-    <SurveyList status="future" />
+    <SurveyList status="future" server:defer />
   </div>
 
 </Layout>

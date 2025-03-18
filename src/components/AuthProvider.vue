@@ -13,7 +13,7 @@ const isLoggedIn = ref(false)
 
 onMounted(async () => {
   const passwordId = localStorage.getItem('passwordId')
-  
+
   if (passwordId) {
 
     isLoading.value = true
@@ -28,10 +28,10 @@ onMounted(async () => {
 
 async function handleSubmit(event: Event) {
   const password = (event.target as HTMLFormElement).password.value
-  
+
   isLoading.value = true
   const { data } = await api.GET(`auth?password=${password}`)
-  isLoading.value = false  
+  isLoading.value = false
 
   if (data.passwordId) {
     isLoggedIn.value = true
@@ -48,7 +48,7 @@ async function handleSubmit(event: Event) {
   <Loading v-if="isLoading" />
   <template v-else>
     <template v-if="isLoggedIn">
-      <slot />
+      <slot></slot>
     </template>
     <template v-else>
       <form @submit.prevent="handleSubmit" class="l-stack">
