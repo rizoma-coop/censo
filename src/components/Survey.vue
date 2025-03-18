@@ -59,7 +59,7 @@ async function saveAnswer(sender: any) {
   if (!error) {
     surveyComplete.value = true
   } else {
-    alert('Ocorreu um erro ao gravar a tua resposta. Por favor, tenta novamente.')
+    alert('Ocorreu um erro ao gravar a tua resposta. Tenta novamente.')
   }
 }
 

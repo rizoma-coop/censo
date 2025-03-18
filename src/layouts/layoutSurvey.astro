@@ -1,6 +1,6 @@
 ---
 import Layout from './layout.astro'
-import Button from '@/components/Button.vue'
+import Button from '@/components/Button.astro'
 import ButtonGroup from '@/components/ButtonGroup.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Breadcrumb from '@/components/Breadcrumb.astro'
@@ -31,7 +31,8 @@ const pages = [
 <Layout>
 
   <Breadcrumbs>
-    <Breadcrumb label="Inquéritos" href="/" /> >
+    <Breadcrumb label="Inquéritos" href="/" />
+    &gt;
     <Breadcrumb label={survey.title} />
   </Breadcrumbs>
 

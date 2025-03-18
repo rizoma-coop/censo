@@ -9,3 +9,9 @@ body.is-logged-in .is-visible-logged-in {
   position: initial;
   pointer-events: auto;
 }
+
+
+/* Display */
+.u-block {
+  display: block;
+}
