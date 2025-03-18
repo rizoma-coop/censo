@@ -41,7 +41,7 @@ const pages = [
   <ButtonGroup class="is-visible-logged-in">
     {
       pages.map(page => (
-        <Button href={page.url} outline={currentPath === page.url} size="small">{page.label}</Button>
+        <Button type="button" href={page.url} outline={currentPath === page.url} size="small">{page.label}</Button>
       ))
     }
   </ButtonGroup>
