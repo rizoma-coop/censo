@@ -2,7 +2,6 @@
 export const prerender = false
 
 import LayoutSurvey from '@/layouts/layoutSurvey.astro'
-import AuthProvider from '@/components/AuthProvider.vue'
 import SurveyCreator from '@/components/SurveyCreator.vue'
 
 const { slug } = Astro.params
@@ -10,9 +9,7 @@ const { slug } = Astro.params
 
 <LayoutSurvey>
   <div id="authContainer">
-    <AuthProvider client:load>
-      <SurveyCreator client:load surveyId={slug || ''} />
-    </AuthProvider>
+    <SurveyCreator client:load surveyId={slug || ''} />
   </div>
 </LayoutSurvey>
 
