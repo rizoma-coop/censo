@@ -1,5 +1,5 @@
 ﻿<script lang="ts" setup>
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref } from 'vue'
 import api from '@/utils/api'
 import Button from './Button.vue'
 import type { SurveysRecord } from '@/utils/xata'
@@ -59,7 +59,7 @@ async function saveAnswer(sender: any) {
   if (!error) {
     surveyComplete.value = true
   } else {
-    alert('Ocorreu um erro ao gravar a tua resposta. Por favor, tenta novamente.')
+    alert('Ocorreu um erro ao gravar a tua resposta. Tenta novamente.')
   }
 }
 

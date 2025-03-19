@@ -1,7 +1,13 @@
 const BASE_URL = import.meta.env.PUBLIC_BASE_URL
 
 const fetchApi = async (endpoint: string, options?: object) => {
+
   const response = await fetch(`${BASE_URL}/api/${endpoint}`, options)
+
+  if (!response.ok) {
+    throw new Error(response.statusText)
+  }
+
   const data = await response.json()
   return {
     data,
