@@ -1,9 +1,10 @@
-﻿
+﻿body.is-logged-in .is-visible-logged-out,
 .is-visible-logged-in {
   visibility: hidden;
   position: absolute;
   pointer-events: none;
 }
+body:not(.is-logged-in) .is-visible-logged-out,
 body.is-logged-in .is-visible-logged-in {
   visibility: visible;
   position: initial;

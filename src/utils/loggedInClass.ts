@@ -10,6 +10,7 @@ const loggedInClass = {
 
   toggle: () => {
     const passwordId = localStorage.getItem('passwordId')
+    console.log(passwordId)
     if (passwordId) {
       loggedInClass.add()
     }

@@ -2,13 +2,10 @@
 export const prerender = false
 
 import LayoutSurvey from '@/layouts/layoutSurvey.astro'
-import AuthProvider from '@/components/AuthProvider.vue'
 import DashboardAnswers from '@/components/DashboardAnswers.vue'
 ---
 
 <LayoutSurvey>
   <h1>Resultados</h1>
-  <AuthProvider client:load>
-    <p>Número de respostas: <strong><DashboardAnswers client:load /></strong></p>
-  </AuthProvider>
+  <p>Número de respostas: <strong><DashboardAnswers client:load /></strong></p>
 </LayoutSurvey>
