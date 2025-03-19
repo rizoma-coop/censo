@@ -1,2 +1,2 @@
-# Censo RizomaCoop 2025
+# Plataforma de inquéritos da RizomaCoop
 
