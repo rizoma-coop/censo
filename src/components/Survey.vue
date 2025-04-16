@@ -41,7 +41,6 @@ function renderSurvey() {
 
     //@ts-ignore
     const survey = new Survey.Model(surveyJson)
-
     survey.render(document.getElementById('surveyContainer'))
     surveyStarted.value = true
 

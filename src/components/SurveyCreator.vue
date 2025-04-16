@@ -12,7 +12,8 @@ const props = defineProps({
 
 const creatorOptions = {
   showLogicTab: true,
-  isAutoSave: true
+  isAutoSave: true,
+  showTranslationTab: true
 }
 
 const isLoading = ref(true)
@@ -30,6 +31,10 @@ async function renderSurveyCreator() {
 
     // @ts-ignore
     const creator = new SurveyCreator.SurveyCreator(creatorOptions)
+    creator.survey.locale = 'pt'
+    //creator.locale = 'en'
+    //Survey.surveyLocalization.currentLocale = 'pt'
+
     creator.text = JSON.stringify(data.survey)
     creator.saveSurveyFunc = async () => {
       const response = await api.PUT('survey', {
@@ -41,7 +46,7 @@ async function renderSurveyCreator() {
         alert('Não foi possível gravar o questionário')
       }
     }
-    
+
     creator.render(document.getElementById('surveyCreatorContainer'))
   }
 }
