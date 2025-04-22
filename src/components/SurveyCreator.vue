@@ -32,8 +32,6 @@ async function renderSurveyCreator() {
     // @ts-ignore
     const creator = new SurveyCreator.SurveyCreator(creatorOptions)
     creator.survey.locale = 'pt'
-    //creator.locale = 'en'
-    //Survey.surveyLocalization.currentLocale = 'pt'
 
     creator.text = JSON.stringify(data.survey)
     creator.saveSurveyFunc = async () => {
