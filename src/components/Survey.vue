@@ -43,7 +43,7 @@ function renderSurvey() {
     const survey = new Survey.Model(surveyJson)
     survey.render(document.getElementById('surveyContainer'))
     surveyStarted.value = true
-
+    survey.locale = 'pt'
     survey.onComplete.add(saveAnswer)
   }
 }

@@ -31,7 +31,9 @@ async function renderSurveyCreator() {
 
     // @ts-ignore
     const creator = new SurveyCreator.SurveyCreator(creatorOptions)
+    Survey.surveyLocalization.defaultLocale = 'pt' // set default language to Portuguese
     creator.survey.locale = 'pt'
+    creator.locale = 'pt'
 
     creator.text = JSON.stringify(data.survey)
     creator.saveSurveyFunc = async () => {
