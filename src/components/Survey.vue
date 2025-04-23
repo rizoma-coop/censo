@@ -44,6 +44,10 @@ function renderSurvey() {
     survey.render(document.getElementById('surveyContainer'))
     surveyStarted.value = true
 
+    //@ts-ignore
+    Survey.surveyLocalization.defaultLocale = 'pt' // set default language to Portuguese
+    survey.locale = 'pt'
+
     survey.onComplete.add(saveAnswer)
   }
 }
