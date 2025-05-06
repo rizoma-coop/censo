@@ -1,4 +1,6 @@
 ﻿<script lang="ts" setup>
+import { computed } from 'vue'
+
 
 const props = defineProps({
   type: {
@@ -19,9 +21,12 @@ const props = defineProps({
   }
 })
 
-const attributes = {
-  class: `button ${props.outline ? 'button--outline' : ''} button--${props.size}`,
-}
+
+const attributes = computed(() => {
+  return {
+    class: `button ${props.outline ? 'button--outline' : ''} button--${props.size}`,
+  }
+})
 </script>
 
 <template>

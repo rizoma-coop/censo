@@ -2,18 +2,29 @@
 import { onMounted, ref } from 'vue'
 import api from '@/utils/api'
 import Button from './Button.vue'
+import ButtonGroup from './ButtonGroup.vue'
 import type { SurveysRecord } from '@/utils/xata'
 import Loading from '@/components/Loading.vue'
 
 type Period = 'before' | 'during' | 'after'
+type Language = 'pt' | 'en'
 
 const period = ref<Period>('before')
 const survey = ref<SurveysRecord | null>(null)
 
+const language = ref<Language>('pt')
+
 onMounted(async () => {
   survey.value = await getSurvey()
   period.value = getPeriod(survey.value)
+  language.value = getLanguage()
+
+  setTimeout(() => {
+    renderSurvey(language.value)
+  }, 1)
 })
+
+
 
 const props = defineProps({
   surveyId: {
@@ -23,7 +34,6 @@ const props = defineProps({
 })
 
 const isLoading = ref(false)
-const surveyStarted = ref(false)
 const surveyComplete = ref(false)
 
 async function getSurvey() {
@@ -33,7 +43,13 @@ async function getSurvey() {
   return data
 }
 
-function renderSurvey() {
+function getLanguage() {
+  const urlParams = new URLSearchParams(window.location.search)
+  const language = urlParams.get('language') as Language || 'pt'
+  return language
+}
+
+function renderSurvey(lang: Language = 'pt') {
 
   const surveyJson = survey.value?.survey
 
@@ -42,11 +58,10 @@ function renderSurvey() {
     //@ts-ignore
     const survey = new Survey.Model(surveyJson)
     survey.render(document.getElementById('surveyContainer'))
-    surveyStarted.value = true
 
     //@ts-ignore
     Survey.surveyLocalization.defaultLocale = 'pt' // set default language to Portuguese
-    survey.locale = 'pt'
+    survey.locale = lang
 
     survey.onComplete.add(saveAnswer)
   }
@@ -84,38 +99,43 @@ function getPeriod(survey: SurveysRecord | null): Period {
   }
 }
 
+function changeLanguage(event: Event) {
+  event.preventDefault()
+  const target = event.target as HTMLButtonElement
+  const lang = target.dataset.lang as Language
+  language.value = lang
+  renderSurvey(lang)
+}
+
 </script>
 
 <template>
 
   <Loading v-if="isLoading || !survey" />
   <template v-else>
-    <div v-if="!surveyStarted" class="l-stack">
 
-      <div v-if="survey.introduction" v-html="survey.introduction" class="l-stack"></div>
-
-      <p v-if="survey.start && survey.end">Período: de {{new Date(survey.start).toLocaleDateString('pt-PT')}} a {{new Date(survey.end).toLocaleDateString('pt-PT')}}</p>
+    <div v-if="surveyComplete">
+      <p>Obrigado pela tua participação!</p>
+    </div>
+    <div v-else class="l-stack">
 
       <template v-if="period === 'before'">
         <p>O {{survey.title}} está a ser preparado.</p>
         <p v-if="survey.start && survey.end">Estará disponível entre os dias {{ new Date(survey.start).toLocaleDateString('pt-PT') }} e {{ new Date(survey.end).toLocaleDateString('pt-PT') }}.</p>
       </template>
       <template v-else-if="period === 'during'">
-        <p v-if="survey.end">Preenche o {{survey.title}} até dia {{ new Date(survey.end).toLocaleDateString('pt-PT') }}.</p>
+        <ButtonGroup>
+          <Button @click="changeLanguage" :outline="language === 'pt'" data-lang="pt" size="small">Português</Button>
+          <Button @click="changeLanguage" :outline="language === 'en'" data-lang="en" size="small">English</Button>
+        </ButtonGroup>
+        <div id="surveyContainer"></div>
       </template>
       <template v-else>
         <p>O {{survey.title}} já terminou. Vamos disponibilizar os resultados em breve.</p>
       </template>
-      <div class="l-row l-row--small" v-if="period === 'during'">
-        <Button @click="renderSurvey">Iniciar</Button>
-      </div>
 
     </div>
-    <div id="surveyContainer"></div>
 
-    <div v-if="surveyComplete">
-      <p>Obrigado pela tua participação!</p>
-    </div>
   </template>
 </template>
 
