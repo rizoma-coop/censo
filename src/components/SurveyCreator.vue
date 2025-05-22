@@ -1,5 +1,5 @@
 ﻿<script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import api from '@/utils/api'
 import Loading from '@/components/Loading.vue'
 
@@ -16,8 +16,6 @@ const creatorOptions = {
   showTranslationTab: true
 }
 
-const isLoading = ref(true)
-
 onMounted(() => {
   renderSurveyCreator()
 })
@@ -26,7 +24,6 @@ async function renderSurveyCreator() {
 
   const { data } = await api.GET(`survey?id=${props.surveyId}`)
 
-  isLoading.value = false
   if (data) {
 
     // @ts-ignore

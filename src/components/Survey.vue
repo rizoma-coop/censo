@@ -1,66 +1,50 @@
 ﻿<script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import api from '@/utils/api'
 import Button from './Button.vue'
 import ButtonGroup from './ButtonGroup.vue'
-import type { SurveysRecord } from '@/utils/xata'
 import Loading from '@/components/Loading.vue'
+import type { SurveysRecord } from '@/utils/xata'
+import api from '@/utils/api'
+import type { Language, Period } from '@/types'
 
-type Period = 'before' | 'during' | 'after'
-type Language = 'pt' | 'en'
-
-const period = ref<Period>('before')
-const survey = ref<SurveysRecord | null>(null)
-
-const language = ref<Language>('pt')
-
-onMounted(async () => {
-  survey.value = await getSurvey()
-  period.value = getPeriod(survey.value)
-  language.value = getLanguage()
-
-  setTimeout(() => {
-    renderSurvey(language.value)
-  }, 1)
-})
-
-
+import { Model } from 'survey-core'
 
 const props = defineProps({
   surveyId: {
     type: String,
     required: true
+  },
+  survey: {
+    type: Object,
+    required: true
+  },
+  language: {
+    type: String as () => Language,
+    default: 'pt'
+  },
+  period: {
+    type: String as () => Period,
+    default: 'before'
   }
 })
+
+const currentLanguage = ref(props.language)
+
+onMounted(async () => {
+  renderSurvey(props.survey.value, currentLanguage.value)
+})
+
 
 const isLoading = ref(false)
 const surveyComplete = ref(false)
 
-async function getSurvey() {
-  isLoading.value = true
-  const { data } = await api.GET(`survey?id=${props.surveyId}`)
-  isLoading.value = false
-  return data
-}
-
-function getLanguage() {
-  const urlParams = new URLSearchParams(window.location.search)
-  const language = urlParams.get('language') as Language || 'pt'
-  return language
-}
-
-function renderSurvey(lang: Language = 'pt') {
-
-  const surveyJson = survey.value?.survey
+function renderSurvey(surveyJson: any, lang: Language) {
 
   if (surveyJson) {
 
-    //@ts-ignore
-    const survey = new Survey.Model(surveyJson)
-    survey.render(document.getElementById('surveyContainer'))
+    const survey = new Model(surveyJson);
 
-    //@ts-ignore
-    Survey.surveyLocalization.defaultLocale = 'pt' // set default language to Portuguese
+    survey.surveyLocalization.defaultLocale = 'pt' // set default language to Portuguese
     survey.locale = lang
 
     survey.onComplete.add(saveAnswer)
@@ -81,30 +65,13 @@ async function saveAnswer(sender: any) {
   }
 }
 
-function getPeriod(survey: SurveysRecord | null): Period {
-  if (survey && survey.start && survey.end) {
-    const today = new Date()
-    const start = new Date(survey.start)
-    const end = new Date(survey.end)
-
-    if (today.getTime() < start.getTime()) {
-      return 'before'
-    } else if (today.getTime() > end.getTime()) {
-      return 'after'
-    } else {
-      return 'during'
-    }
-  } else {
-    return 'before'
-  }
-}
 
 function changeLanguage(event: Event) {
   event.preventDefault()
   const target = event.target as HTMLButtonElement
   const lang = target.dataset.lang as Language
-  language.value = lang
-  renderSurvey(lang)
+  currentLanguage.value = lang
+  renderSurvey(props.survey, lang)
 }
 
 </script>

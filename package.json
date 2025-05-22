@@ -10,14 +10,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/netlify": "^6.1.0",
-    "@astrojs/vue": "^5.0.6",
-    "@sentry/astro": "^8.52.1",
+    "@astrojs/netlify": "^6.3.4",
+    "@astrojs/vue": "^5.1.0",
+    "@sentry/astro": "^8.55.0",
     "@xata.io/client": "0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930",
-    "astro": "^5.1.5",
+    "astro": "^5.8.0",
     "sharp": "^0.33.5",
-    "survey-core": "^1.12.21",
-    "survey-creator-core": "^1.12.21",
-    "vue": "^3.5.13"
+    "survey-analytics": "^2.0.10",
+    "survey-core": "^2.0.10",
+    "survey-creator-core": "^2.0.10",
+    "survey-vue3-ui": "^2.0.10",
+    "vue": "^3.5.14"
   }
 }

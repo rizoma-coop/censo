@@ -3,14 +3,42 @@ export const prerender = false
 
 import LayoutSurvey from '@/layouts/layoutSurvey.astro'
 import Survey from '@/components/Survey.vue'
+import api from '@/utils/api'
+import type { SurveysRecord } from '@/utils/xata'
+import type { Language, Period } from '@/types'
 
 const { slug } = Astro.params
 
+const surveyJson = await api.GET(`survey?id=${slug}`) as SurveysRecord | null
+const language = Astro.url.searchParams.get('language') as Language || 'pt'
+const period = getPeriod(surveyJson as SurveysRecord | null)
+
+function getPeriod(survey: SurveysRecord | null): Period {
+
+  if (survey && survey.start && survey.end) {
+    const today = new Date()
+    const start = new Date(survey.start)
+    const end = new Date(survey.end)
+
+    if (today.getTime() < start.getTime()) {
+      return 'before'
+    } else if (today.getTime() > end.getTime()) {
+      return 'after'
+    } else {
+      return 'during'
+    }
+  } else {
+    return 'before'
+  }
+}
 ---
 
 <LayoutSurvey>
   <Survey
     client:load
     surveyId={slug || ''}
+    survey={surveyJson}
+    language={language}
+    period={period}
   />
 </LayoutSurvey>
