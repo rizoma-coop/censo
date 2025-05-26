@@ -1,32 +1,42 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import api from '@/utils/api'
+import 'survey-analytics/survey.analytics.css'
+import { onMounted, ref, type PropType } from 'vue'
 import Loading from '@/components/Loading.vue'
+import type { SurveysRecord, AnswersRecord } from '@/utils/xata'
+/* import { Model } from 'survey-core' */
+/* import { VisualizationPanel } from 'survey-analytics' */
 
 const props = defineProps({
-  surveyId: {
-    type: String,
+  surveyJson: {
+    type: Object as PropType<SurveysRecord>,
     required: true
   },
-  answers: Array,
-  survey: Object
+  answersJson: {
+    type: Array as PropType<AnswersRecord[]>,
+    required: true
+  }
 })
+
+const isLoading = ref(true)
 
 onMounted(async () => {
-  renderDashboard(props.survey, props.answers)
+  renderDashboard(props.surveyJson, props.answersJson)
 })
 
-async function renderDashboard(surveyJson: any, surveyResults: any) {
+async function renderDashboard(surveyJson: SurveysRecord, answersJson: AnswersRecord[]) {
 
-  if (surveyJson && surveyResults) {
-    //@ts-ignore
+  if (surveyJson && answersJson) {
+    // @ts-ignore
     const survey = new Survey.Model(surveyJson)
-    //@ts-ignore
+    // @ts-ignore
     const vizPanel = new SurveyAnalytics.VisualizationPanel(
       survey.getAllQuestions(),
+      answersJson
     )
 
-    vizPanel.render(document.getElementById('surveyDashboardContainer'));
+    vizPanel.render(document.getElementById('surveyDashboardContainer'))
+
+    isLoading.value = false
   }
 }
 
@@ -34,6 +44,6 @@ async function renderDashboard(surveyJson: any, surveyResults: any) {
 
 <template>
   <div id="surveyDashboardContainer">
-    <Loading client:load />
+    <Loading v-if="isLoading" />
   </div>
 </template>

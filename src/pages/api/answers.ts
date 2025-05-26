@@ -3,7 +3,6 @@
 import xata from '@/utils/xataClient'
 import type { APIRoute } from 'astro'
 
-
 export const GET: APIRoute = async ({ request }) => {
   try {
     const urlParams = new URL(request.url).searchParams
@@ -11,7 +10,6 @@ export const GET: APIRoute = async ({ request }) => {
 
     if (surveyId) {
       const response = await xata.answers
-        .select(['xata_id'])
         .filter({
           survey: surveyId
         })

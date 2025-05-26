@@ -10,8 +10,16 @@ const { slug } = Astro.params
 
 <LayoutSurvey>
   <div id="authContainer">
-    <SurveyCreator client:load surveyId={slug || ''} />
+    <SurveyCreator
+      client:load
+      surveyId={slug || ''}
+    />
   </div>
+
+  <script type="text/javascript" src="/vendor/survey.core.min.js"></script>
+  <script type="text/javascript" src="/vendor/survey-js-ui.min.js"></script>
+  <script type="text/javascript" src="/vendor/survey-creator-core.min.js"></script>
+  <script type="text/javascript" src="/vendor/survey-creator-js.min.js"></script>
 </LayoutSurvey>
 
 <style>

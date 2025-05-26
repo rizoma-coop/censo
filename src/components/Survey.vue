@@ -33,7 +33,7 @@ const props = defineProps({
 })
 
 const survey = ref()
-const currentLanguage = ref('')
+const currentLanguage = ref(props.language)
 surveyLocalization.defaultLocale = currentLanguage.value
 
 onMounted(async () => {
