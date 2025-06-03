@@ -38,9 +38,7 @@ onMounted(async () => {
   //survey.value.onComplete.add(saveAnswer)
 
   if (props.period === 'during') {
-    setTimeout(() => {
-      renderSurvey(props.surveyJson, language.value)
-    }, 1)
+    renderSurvey(props.surveyJson, language.value)
   } else {
     isLoading.value = false
   }
@@ -51,10 +49,10 @@ const surveyComplete = ref(false)
 
 function renderSurvey(surveyJson: SurveysRecord, lang: Language = 'pt') {
 
-  if (surveyJson) {
-
+  //@ts-ignore
+  if (window.Survey && surveyJson) {
     //@ts-ignore
-    const survey = new Survey.Model(surveyJson)
+    const survey = new window.Survey.Model(surveyJson)
     survey.render(document.getElementById('surveyContainer'))
 
     isLoading.value = false
@@ -64,7 +62,10 @@ function renderSurvey(surveyJson: SurveysRecord, lang: Language = 'pt') {
     survey.locale = lang
 
     survey.onComplete.add(saveAnswer)
-
+  } else {
+    setTimeout(() => {
+      renderSurvey(surveyJson, lang)
+    }, 5)
   }
 }
 

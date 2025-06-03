@@ -18,25 +18,31 @@ const props = defineProps({
 const isLoading = ref(true)
 
 onMounted(async () => {
-  setTimeout(() => {
-    renderDashboard(props.surveyJson, props.answersJson)
-  }, 10);
+  renderDashboard(props.surveyJson, props.answersJson)
 })
 
 async function renderDashboard(surveyJson: SurveysRecord, answersJson: AnswersRecord[]) {
 
-  if (surveyJson && answersJson) {
-    // @ts-ignore
-    const survey = new Survey.Model(surveyJson)
-    // @ts-ignore
-    const vizPanel = new SurveyAnalytics.VisualizationPanel(
-      survey.getAllQuestions(),
-      answersJson
-    )
+  // @ts-ignore
+  if (window.Survey && window.SurveyAnalytics) {
 
-    vizPanel.render(document.getElementById('surveyDashboardContainer'))
+    if (surveyJson && answersJson) {
+      // @ts-ignore
+      const survey = new window.Survey.Model(surveyJson)
+      // @ts-ignore
+      const vizPanel = new window.SurveyAnalytics.VisualizationPanel(
+        survey.getAllQuestions(),
+        answersJson
+      )
 
-    isLoading.value = false
+      vizPanel.render(document.getElementById('surveyDashboardContainer'))
+
+      isLoading.value = false
+    }
+  } else {
+    setTimeout(() => {
+      renderDashboard(surveyJson, answersJson)
+    }, 10);
   }
 }
 
