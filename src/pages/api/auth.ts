@@ -1,8 +1,6 @@
 ﻿import type { APIRoute } from 'astro'
 import xata from '@/utils/xataClient'
 
-export const prerender = false
-
 export const GET: APIRoute = async ({ request }) => {
   try {
     const urlParams = new URL(request.url).searchParams

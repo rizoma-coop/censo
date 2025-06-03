@@ -1,7 +1,7 @@
 ---
 import Layout from './layout.astro'
-import Button from '@/components/Button.astro'
-import ButtonGroup from '@/components/ButtonGroup.astro'
+import Button from '@/components/Button.vue'
+import ButtonGroup from '@/components/ButtonGroup.vue'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Breadcrumb from '@/components/Breadcrumb.astro'
 import api from '@/utils/api'
@@ -47,4 +47,5 @@ const pages = [
   </ButtonGroup>
 
   <slot />
+
 </Layout>

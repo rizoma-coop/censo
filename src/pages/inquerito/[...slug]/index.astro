@@ -1,16 +1,65 @@
 ---
-export const prerender = false
-
 import LayoutSurvey from '@/layouts/layoutSurvey.astro'
 import Survey from '@/components/Survey.vue'
+import api from '@/utils/api'
+import type { SurveysRecord } from '@/utils/xata'
+import type { Language, Period } from '@/types'
+import Scripts from '@/components/Scripts.astro'
+import Styles from '@/components/Styles.astro'
 
 const { slug } = Astro.params
 
+let survey: SurveysRecord | null = null
+let surveyJson: SurveysRecord | null = null
+let period: Period = 'before'
+const language = Astro.url.searchParams.get('language') as Language || 'pt'
+
+const { data, error } = await api.GET(`survey?id=${slug}`)
+if (data) {
+  survey = data
+  surveyJson = data.survey as SurveysRecord | null
+  period = getPeriod(data.start, data.end)
+}
+
+function getPeriod(start: string, end: string): Period {
+
+  if (start && end) {
+    const today = new Date()
+    const startDate = new Date(start)
+    const endDate = new Date(end)
+
+    if (today.getTime() < startDate.getTime()) {
+      return 'before'
+    } else if (today.getTime() > endDate.getTime()) {
+      return 'after'
+    } else {
+      return 'during'
+    }
+  } else {
+    return 'before'
+  }
+}
 ---
 
 <LayoutSurvey>
+
+  <Styles
+    files={[
+      'survey-core.min.css'
+    ]}
+  />
+
   <Survey
     client:load
     surveyId={slug || ''}
+    surveyJson={surveyJson}
+    language={language}
+    period={period}
+    startDate={survey?.start ? new Date(survey?.start) : null}
+    endDate={survey?.end ? new Date(survey?.end) : null}
+  />
+
+  <Scripts
+    files={[]}
   />
 </LayoutSurvey>

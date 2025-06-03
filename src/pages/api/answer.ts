@@ -1,6 +1,4 @@
-﻿export const prerender = false
-
-import xata from '@/utils/xataClient'
+﻿import xata from '@/utils/xataClient'
 import type { APIRoute } from 'astro'
 
 export const POST: APIRoute = async ({ request }) => {

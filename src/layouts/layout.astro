@@ -1,7 +1,5 @@
 ﻿---
 import '@/css/main.css'
-import 'survey-core/defaultV2.min.css'
-import 'survey-creator-core/survey-creator-core.min.css'
 import Header from '@/components/Header.astro'
 import Footer from '@/components/Footer.astro'
 ---
@@ -26,15 +24,6 @@ import Footer from '@/components/Footer.astro'
     <slot />
   </main>
   <Footer />
-
-  <script type="text/javascript" src="/vendor/survey.core.min.js"></script>
-  <script type="text/javascript" src="/vendor/survey-js-ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendor/survey-creator-core.min.js"></script>
-  <script type="text/javascript" src="/vendor/survey-creator-js.min.js"></script>
-
-  <script type="text/javascript" src="/vendor/survey.i18n.min.js"></script>
-  <script type="text/javascript" src="/vendor/portuguese.min.js"></script>
 
   <script src="main.ts"></script>
 </body>

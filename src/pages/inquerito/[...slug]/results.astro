@@ -1,11 +1,46 @@
 ---
-export const prerender = false
-
 import LayoutSurvey from '@/layouts/layoutSurvey.astro'
-import DashboardAnswers from '@/components/DashboardAnswers.vue'
+import SurveyDashboard from '@/components/SurveyDashboard.vue'
+import api from '@/utils/api'
+import type { SurveysRecord, AnswersRecord } from '@/utils/xata'
+import Scripts from '@/components/Scripts.astro'
+import Styles from '@/components/Styles.astro'
+
+const { slug } = Astro.params
+let surveyJson: SurveysRecord | null = null
+let answersJson: AnswersRecord[] | null = null
+
+const survey = await api.GET(`survey?id=${slug}`)
+const answers = await api.GET(`answers?surveyId=${slug}`)
+
+if (survey.data && answers.data) {
+  surveyJson = survey.data.survey as SurveysRecord | null
+  answersJson = answers.data.map((x: AnswersRecord) => x.answer)
+}
 ---
 
 <LayoutSurvey>
+
+  <Styles
+    files={[
+      'survey.analytics.min.css'
+    ]}
+  />
+
   <h1>Resultados</h1>
-  <p>Número de respostas: <strong><DashboardAnswers client:load /></strong></p>
+  <p>Número de respostas: <strong>{answers.data.length}</strong></p>
+
+  <SurveyDashboard
+    client:load
+    surveyJson={surveyJson}
+    answersJson={answersJson}
+  />
+
+  <Scripts
+    files={[
+      'plotly.min.js',
+      'survey.analytics.min.js'
+    ]}
+  />
+
 </LayoutSurvey>

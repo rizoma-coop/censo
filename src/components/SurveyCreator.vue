@@ -1,5 +1,5 @@
 ﻿<script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import api from '@/utils/api'
 import Loading from '@/components/Loading.vue'
 
@@ -16,40 +16,46 @@ const creatorOptions = {
   showTranslationTab: true
 }
 
-const isLoading = ref(true)
-
 onMounted(() => {
-  renderSurveyCreator()
+  renderSurveyCreator(props.surveyId)
 })
 
-async function renderSurveyCreator() {
+async function renderSurveyCreator(surveyId?: string) {
 
-  const { data } = await api.GET(`survey?id=${props.surveyId}`)
+  // @ts-ignore
+  if (window.SurveyCreator) {
 
-  isLoading.value = false
-  if (data) {
+    const { data } = await api.GET(`survey?id=${surveyId}`)
 
-    // @ts-ignore
-    const creator = new SurveyCreator.SurveyCreator(creatorOptions)
+    if (data) {
 
-    //@ts-ignore
-    Survey.surveyLocalization.defaultLocale = 'pt' // set default language to Portuguese
-    //@ts-ignore
-    Survey.surveyLocalization.supportedLocales = ['pt', 'en'];
+      // @ts-ignore
+      const creator = new window.SurveyCreator.SurveyCreator(creatorOptions)
 
-    creator.text = JSON.stringify(data.survey)
-    creator.saveSurveyFunc = async () => {
-      const response = await api.PUT('survey', {
-        id: props.surveyId,
-        survey: creator.text,
-      })
+      //@ts-ignore
+      Survey.surveyLocalization.defaultLocale = 'pt' // set default language to Portuguese
+      //@ts-ignore
+      Survey.surveyLocalization.supportedLocales = ['pt', 'en'];
 
-      if (response.error) {
-        alert('Não foi possível gravar o questionário')
+      creator.text = JSON.stringify(data.survey)
+      creator.saveSurveyFunc = async () => {
+        const response = await api.PUT('survey', {
+          id: props.surveyId,
+          survey: creator.text,
+        })
+
+        if (response.error) {
+          alert('Não foi possível gravar o questionário')
+        }
       }
+
+      creator.render(document.getElementById('surveyCreatorContainer'))
+    } else {
+      setTimeout(() => {
+        renderSurveyCreator(surveyId)
+      }, 5);
     }
 
-    creator.render(document.getElementById('surveyCreatorContainer'))
   }
 }
 </script>
