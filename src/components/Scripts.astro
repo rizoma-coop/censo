@@ -1,0 +1,25 @@
+---
+type Props = {
+  files?: string[]
+  defaultScripts?: boolean
+}
+
+const defaultFiles = [
+  'survey.core.min.js',
+  'survey-js-ui.min.js',
+  'survey.i18n.min.js',
+  'portuguese.min.js'
+]
+const { files, defaultScripts = true } = Astro.props as Props
+---
+
+{
+  defaultScripts && defaultFiles.map(file => (
+    <script type="text/javascript" src={`/vendor/${file}`}></script>
+  ))
+}
+{
+  files?.map(file => (
+    <script type="text/javascript" src={`/vendor/${file}`}></script>
+  ))
+}

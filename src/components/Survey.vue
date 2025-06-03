@@ -6,9 +6,6 @@ import Loading from '@/components/Loading.vue'
 import api from '@/utils/api'
 import type { Language, Period } from '@/types'
 import type { SurveysRecord } from '@/utils/xata'
-import { Model, surveyLocalization } from 'survey-core'
-import { SurveyComponent } from '../../node_modules/survey-vue3-ui'
-import 'survey-core/i18n/portuguese'
 
 const props = defineProps({
   surveyId: {
@@ -32,19 +29,44 @@ const props = defineProps({
 
 })
 
-const survey = ref()
-const currentLanguage = ref(props.language)
-surveyLocalization.defaultLocale = currentLanguage.value
+const language = ref<Language>(props.language)
 
 onMounted(async () => {
-  surveyLocalization.defaultLocale = currentLanguage.value
-  survey.value = new Model(props.surveyJson)
-  survey.value.locale = currentLanguage.value
-  survey.value.onComplete.add(saveAnswer)
+  //surveyLocalization.defaultLocale = currentLanguage.value
+  //survey.value = new Model(props.surveyJson)
+  //survey.value.locale = currentLanguage.value
+  //survey.value.onComplete.add(saveAnswer)
+
+  if (props.period === 'during') {
+    setTimeout(() => {
+      renderSurvey(props.surveyJson, language.value)
+    }, 1)
+  } else {
+    isLoading.value = false
+  }
 })
 
 const isLoading = ref(false)
 const surveyComplete = ref(false)
+
+function renderSurvey(surveyJson: SurveysRecord, lang: Language = 'pt') {
+
+  if (surveyJson) {
+
+    //@ts-ignore
+    const survey = new Survey.Model(surveyJson)
+    survey.render(document.getElementById('surveyContainer'))
+
+    isLoading.value = false
+
+    //@ts-ignore
+    Survey.surveyLocalization.defaultLocale = 'pt' // set default language to Portuguese
+    survey.locale = lang
+
+    survey.onComplete.add(saveAnswer)
+
+  }
+}
 
 async function saveAnswer(sender: any) {
 
@@ -65,18 +87,15 @@ function changeLanguage(event: Event) {
   event.preventDefault()
   const target = event.target as HTMLButtonElement
   const lang = target.dataset.lang as Language
-  surveyLocalization.currentLocale = lang
-  currentLanguage.value = lang
-
-
-surveyLocalization.defaultLocale = lang
+  language.value = lang
+  renderSurvey(props.surveyJson, lang)
 }
 
 </script>
 
 <template>
 
-  <Loading v-if="isLoading || !survey" />
+  <Loading v-if="isLoading" />
   <template v-else>
 
     <div v-if="surveyComplete">
@@ -85,18 +104,18 @@ surveyLocalization.defaultLocale = lang
     <div v-else class="l-stack">
 
       <template v-if="period === 'before'">
-        <p>O {{survey.title}} está a ser preparado.</p>
+        <p>O inquérito está a ser preparado.</p>
         <p v-if="startDate && endDate">Estará disponível entre os dias {{ startDate.toLocaleDateString('pt-PT') }} e {{ endDate.toLocaleDateString('pt-PT') }}.</p>
       </template>
       <template v-else-if="period === 'during'">
         <ButtonGroup>
-          <Button @click="changeLanguage" :outline="currentLanguage === 'pt'" data-lang="pt" size="small">Português</Button>
-          <Button @click="changeLanguage" :outline="currentLanguage === 'en'" data-lang="en" size="small">English</Button>
+          <Button @click="changeLanguage" :outline="language === 'pt'" data-lang="pt" size="small">Português</Button>
+          <Button @click="changeLanguage" :outline="language === 'en'" data-lang="en" size="small">English</Button>
         </ButtonGroup>
-        <SurveyComponent v-if="survey" :model="survey" />
+        <div id="surveyContainer"></div>
       </template>
       <template v-else>
-        <p>O {{survey.title}} já terminou. Vamos disponibilizar os resultados em breve.</p>
+        <p>O inquérito já terminou. Vamos disponibilizar os resultados em breve.</p>
       </template>
 
     </div>

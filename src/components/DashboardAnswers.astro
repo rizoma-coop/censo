@@ -1,0 +1,17 @@
+﻿---
+import api from '@/utils/api'
+
+let answers = null
+let isLoading = true
+
+try {
+  const response = await api.GET(`answers?surveyId=survey-comunicacao-comunidade`)
+  if (!response.error) {
+    answers = response.data.length
+  }
+} finally {
+  isLoading = false
+}
+---
+
+<span>{answers}</span>

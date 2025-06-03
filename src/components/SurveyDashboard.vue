@@ -3,8 +3,6 @@ import 'survey-analytics/survey.analytics.css'
 import { onMounted, ref, type PropType } from 'vue'
 import Loading from '@/components/Loading.vue'
 import type { SurveysRecord, AnswersRecord } from '@/utils/xata'
-/* import { Model } from 'survey-core' */
-/* import { VisualizationPanel } from 'survey-analytics' */
 
 const props = defineProps({
   surveyJson: {
@@ -20,7 +18,9 @@ const props = defineProps({
 const isLoading = ref(true)
 
 onMounted(async () => {
-  renderDashboard(props.surveyJson, props.answersJson)
+  setTimeout(() => {
+    renderDashboard(props.surveyJson, props.answersJson)
+  }, 10);
 })
 
 async function renderDashboard(surveyJson: SurveysRecord, answersJson: AnswersRecord[]) {

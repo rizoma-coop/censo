@@ -1,14 +1,21 @@
 ﻿---
-export const prerender = false
-
-import 'survey-creator-core/survey-creator-core.min.css'
 import LayoutSurvey from '@/layouts/layoutSurvey.astro'
 import SurveyCreator from '@/components/SurveyCreator.vue'
+import Scripts from '@/components/Scripts.astro'
+import Styles from '@/components/Styles.astro'
 
 const { slug } = Astro.params
 ---
 
 <LayoutSurvey>
+
+  <Styles
+    files={[
+      'survey-core.min.css',
+      'survey-creator-core.min.css',
+    ]}
+  />
+
   <div id="authContainer">
     <SurveyCreator
       client:load
@@ -16,10 +23,13 @@ const { slug } = Astro.params
     />
   </div>
 
-  <script type="text/javascript" src="/vendor/survey.core.min.js"></script>
-  <script type="text/javascript" src="/vendor/survey-js-ui.min.js"></script>
-  <script type="text/javascript" src="/vendor/survey-creator-core.min.js"></script>
-  <script type="text/javascript" src="/vendor/survey-creator-js.min.js"></script>
+
+  <Scripts
+    files={[
+      'survey-creator-core.min.js',
+      'survey-creator-js.min.js'
+    ]}
+  />
 </LayoutSurvey>
 
 <style>

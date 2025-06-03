@@ -1,11 +1,11 @@
 ---
-export const prerender = false
-
 import LayoutSurvey from '@/layouts/layoutSurvey.astro'
 import Survey from '@/components/Survey.vue'
 import api from '@/utils/api'
 import type { SurveysRecord } from '@/utils/xata'
 import type { Language, Period } from '@/types'
+import Scripts from '@/components/Scripts.astro'
+import Styles from '@/components/Styles.astro'
 
 const { slug } = Astro.params
 
@@ -42,6 +42,13 @@ function getPeriod(start: string, end: string): Period {
 ---
 
 <LayoutSurvey>
+
+  <Styles
+    files={[
+      'survey-core.min.css'
+    ]}
+  />
+
   <Survey
     client:load
     surveyId={slug || ''}
@@ -50,5 +57,9 @@ function getPeriod(start: string, end: string): Period {
     period={period}
     startDate={survey?.start ? new Date(survey?.start) : null}
     endDate={survey?.end ? new Date(survey?.end) : null}
+  />
+
+  <Scripts
+    files={[]}
   />
 </LayoutSurvey>

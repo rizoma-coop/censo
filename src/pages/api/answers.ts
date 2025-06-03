@@ -1,5 +1,4 @@
-﻿export const prerender = false
-
+﻿
 import xata from '@/utils/xataClient'
 import type { APIRoute } from 'astro'
 
