@@ -1,6 +1,5 @@
 ---
 import LayoutSurvey from '@/layouts/layoutSurvey.astro'
-import DashboardAnswers from '@/components/DashboardAnswers.astro'
 import SurveyDashboard from '@/components/SurveyDashboard.vue'
 import api from '@/utils/api'
 import type { SurveysRecord, AnswersRecord } from '@/utils/xata'
@@ -29,7 +28,7 @@ if (survey.data && answers.data) {
   />
 
   <h1>Resultados</h1>
-  <p>Número de respostas: <strong><DashboardAnswers client:load /></strong></p>
+  <p>Número de respostas: <strong>{answers.data.length}</strong></p>
 
   <SurveyDashboard
     client:load

@@ -14,9 +14,9 @@
     "@astrojs/vue": "^5.1.0",
     "@sentry/astro": "^8.55.0",
     "@xata.io/client": "0.0.0-next.va121e4207b94bfe0a3c025fc00b247b923880930",
-    "astro": "^5.8.0",
+    "astro": "^5.8.1",
     "sharp": "^0.33.5",
-    "survey-analytics": "^2.0.10",
-    "vue": "^3.5.14"
+    "survey-analytics": "^2.1.0",
+    "vue": "^3.5.16"
   }
 }
